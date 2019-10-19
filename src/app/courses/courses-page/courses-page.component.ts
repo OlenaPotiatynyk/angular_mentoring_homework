@@ -30,6 +30,8 @@ export class CoursesPageComponent implements OnInit {
     }
   ];
 
+  private users: User[];
+
   constructor() { }
 
   ngOnInit() {
