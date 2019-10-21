@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CourseModel, UserModel } from '../../shared/shared.models';
+import { UserModel } from '../../shared/user.model';
+import { CourseModel } from '../../shared/course.model';
 
 @Component({
   selector: 'app-courses-page',
