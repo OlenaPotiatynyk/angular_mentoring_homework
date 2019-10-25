@@ -3,11 +3,11 @@
     <i class="search__input-icon material-icons">search</i>
     <input [(ngModel)]="value" class="search__input-field" placeholder="Text to search" (keyup.enter)="search()">
   </div>
-  <button class="search__button button button_ok" (click)="search()">Search</button>
+  <button class="search__button button button_l button_ok" (click)="search()">Search</button>
 </div>
 
 <div class="menu">
-  <button class="menu__button button button_action">
+  <button class="button button_m button_action">
     <i class="menu__button-icon material-icons">add</i>
     <span class="menu__button-text">Add course</span>
   </button>
@@ -18,5 +18,5 @@
 </div>
 
 <div class="container">
-  <button (click)="loadMoreHandler()">LOAD MORE</button>
+  <button (click)="loadMoreHandler()" class="link">LOAD MORE</button>
 </div>

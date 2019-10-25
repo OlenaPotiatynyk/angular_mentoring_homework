@@ -3,23 +3,35 @@
     <div class="header">
       <h2 class="title">{{item.title}}</h2>
       <div class="time-info">
-        <span class="duration">{{item.duration}}</span>
-        <span class="date">{{item.creationDate}}</span>
+        <button class="button button_s">
+          <i class="material-icons">
+            access_time
+          </i>
+          <span class="duration">{{item.duration}} min</span>
+        </button>
+        <button class="button button_s">
+          <i class="material-icons">
+            calendar_today
+          </i>
+          <span class="date">{{item.creationDate}}</span>
+        </button>
       </div>
     </div>
     <div class="description">
-      <p>{{item.description}}</p>
+      <span>{{item.description}}</span>
     </div>
   </div>
   <div class="right-column">
-    <button class="button button_action" (click)="editItem()">
-      <i class="material-icons button-icon">edit</i>
-      <span class="button-text">Edit</span>
-    </button>
+    <div class="action-bar">
+      <button class="button button_s button_action" (click)="editItem()">
+        <i class="material-icons">edit</i>
+        <span>Edit</span>
+      </button>
 
-    <button class="button button_action" (click)="deleteItem.emit()">
-      <i class="material-icons button-icon">delete</i>
-      <span class="button-text">Delete</span>
-    </button>
+      <button class="button button_s button_action" (click)="deleteItem.emit()">
+        <i class="material-icons">delete</i>
+        <span>Delete</span>
+      </button>
+    </div>
   </div>
 </article>

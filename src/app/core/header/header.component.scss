@@ -18,11 +18,9 @@
   justify-content: flex-end;
 
   &__element {
-    display: flex;
     margin: auto 0 auto 40px;
     font-size: 14px;
     line-height: 24px;
-    color: $white;
 
     .material-icons {
       margin-right: 8px;

@@ -9,10 +9,11 @@ import mockData from '../../shared/mockData';
   styleUrls: ['./courses-page.component.scss']
 })
 export class CoursesPageComponent implements OnInit {
-  private courses: CourseModel[] = mockData;
+  public courses: CourseModel[] = mockData;
+  public value = '';
+
   private users: UserModel[];
   private fakeValue: number;
-  private value = '';
 
   constructor() { }
 
