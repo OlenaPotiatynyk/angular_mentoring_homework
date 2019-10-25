@@ -9,12 +9,9 @@ export class CourseItemComponent implements OnInit, OnChanges {
   @Input() item: any;
   @Output() deleteItem = new EventEmitter();
 
-  private fakeLink: string;
-
   constructor() { }
 
   ngOnInit(): void {
-    this.fakeLink = `fakeValue${this.item.id}`;
     console.log('%c OnInit ' + this.item.title, 'color: red;');
   }
 

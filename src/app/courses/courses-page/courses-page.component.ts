@@ -11,10 +11,12 @@ import mockData from '../../shared/mockData';
 export class CoursesPageComponent implements OnInit {
   private courses: CourseModel[] = mockData;
   private users: UserModel[];
+  private fakeLink: string;
 
   constructor() { }
 
   ngOnInit(): void {
+    this.fakeLink = `fakeValue`;
   }
 
   search(): void {
