@@ -1,1 +1,27 @@
-/* You can add global styles to this file, and also import other style files */
+@import '~normalize.css';
+
+@import 'app/shared/_variables';
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: 'Source Sans Pro', sans-serif;
+}
+
+button {
+  line-height: 1;
+}
+
+.button {
+
+
+  &_ok {
+    background-color: $sick-green;
+  }
+
+  &_action {
+    background-color: $dark-sky-blue;
+  }
+}

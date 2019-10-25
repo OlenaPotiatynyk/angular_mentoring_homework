@@ -1,0 +1,26 @@
+<article class="item">
+  <div class="left-column">
+    <div class="header">
+      <h2 class="title">{{item.title}}</h2>
+      <div class="time">
+        <span class="duration">{{item.duration}}</span>
+        <span class="date">{{item.creationDate}}</span>
+      </div>
+    </div>
+    <div class="description">
+      <p>{{item.description}}</p>
+      <a href="{{fakeLink}}">Fake link</a
+      ></div>
+  </div>
+  <div class="right-column">
+    <button class="button button_action" (click)="editItem()">
+      <i class="material-icons button-icon">edit</i>
+      <span class="button-text">Edit</span>
+    </button>
+
+    <button class="button button_action" (click)="deleteItem.emit()">
+      <i class="material-icons button-icon">delete</i>
+      <span class="button-text">Delete</span>
+    </button>
+  </div>
+</article>

@@ -1,0 +1,31 @@
+@import '../../shared/_variables';
+
+.header-wrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 64px;
+  background-color: $charcoal-grey;
+  padding: 10px 40px 10px 85px;
+}
+
+.logo-wrapper {
+  position: relative;
+}
+
+.login-menu {
+  display: flex;
+  justify-content: flex-end;
+
+  &__element {
+    display: flex;
+    margin: auto 0 auto 40px;
+    font-size: 14px;
+    line-height: 24px;
+    color: $white;
+
+    .material-icons {
+      margin-right: 8px;
+    }
+  }
+}

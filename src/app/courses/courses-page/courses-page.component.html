@@ -1,3 +1,24 @@
-<p *ngFor="let course of courses">
-  courses-page works! {{course.title}}
-</p>
+<div class="content-wrapper">
+  <div class="search">
+    <div class="search__input">
+      <i class="search__input-icon material-icons">search</i>
+      <input class="search__input-field" placeholder="Text to search">
+    </div>
+    <button class="search__button button button_ok" (click)="search()">Search</button>
+  </div>
+
+  <div class="menu">
+    <button class="menu__button button button_action">
+      <i class="menu__button-icon material-icons">add</i>
+      <span class="menu__button-text">Add course</span>
+    </button>
+  </div>
+
+  <div *ngFor="let course of courses" class="container">
+    <app-course-item [item]="course" (deleteItem)="onDeleteItem(course.id)"></app-course-item>
+  </div>
+
+  <div class="container">
+    <a href="#">LOAD MORE</a>
+  </div>
+</div>

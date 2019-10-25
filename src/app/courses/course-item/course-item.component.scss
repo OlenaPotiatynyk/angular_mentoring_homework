@@ -1,0 +1,31 @@
+@import '../../shared/_variables.scss';
+
+.item {
+  display: flex;
+  flex: auto;
+  text-align: left;
+  color: $dark;
+
+  .left-column {
+    .header {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+
+  .right-column {
+    width: 500px;
+
+    .button {
+
+    }
+
+    .button-icon {
+      font-size: 14px;
+    }
+
+    .button-text {
+      margin-left: 6px;
+    }
+  }
+}
