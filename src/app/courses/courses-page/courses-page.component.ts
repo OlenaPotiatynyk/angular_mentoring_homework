@@ -11,17 +11,22 @@ import mockData from '../../shared/mockData';
 export class CoursesPageComponent implements OnInit {
   private courses: CourseModel[] = mockData;
   private users: UserModel[];
-  private fakeLink: string;
+  private fakeValue: number;
   private value = '';
 
   constructor() { }
 
   ngOnInit(): void {
-    this.fakeLink = `fakeValue`;
+    this.fakeValue = Math.random();
+    console.log(this.fakeValue);
   }
 
   search(): void {
     console.log('%c' + this.value, 'color: crimson;');
+  }
+
+  loadMoreHandler(): void {
+    console.log('%cYou just clicked LOAD MORE button. Well done!', 'color: chocolate;');
   }
 
   onDeleteItem(id): void {
