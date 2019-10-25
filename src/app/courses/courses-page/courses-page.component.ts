@@ -12,6 +12,7 @@ export class CoursesPageComponent implements OnInit {
   private courses: CourseModel[] = mockData;
   private users: UserModel[];
   private fakeLink: string;
+  private value = '';
 
   constructor() { }
 
@@ -20,11 +21,11 @@ export class CoursesPageComponent implements OnInit {
   }
 
   search(): void {
-    console.log('%c Don\'t touch me!', 'color: crimson;');
+    console.log('%c' + this.value, 'color: crimson;');
   }
 
   onDeleteItem(id): void {
-    console.log('%c You just deleted item with id: ' + id, 'color: green;');
+    console.log('%cYou just deleted item with id: ' + id, 'color: green;');
   }
 
 }

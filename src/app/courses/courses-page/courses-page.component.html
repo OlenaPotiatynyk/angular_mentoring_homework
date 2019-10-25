@@ -2,7 +2,7 @@
   <div class="search">
     <div class="search__input">
       <i class="search__input-icon material-icons">search</i>
-      <input class="search__input-field" placeholder="Text to search">
+      <input [(ngModel)]="value" class="search__input-field" placeholder="Text to search" (keyup.enter)="search()">
     </div>
     <button class="search__button button button_ok" (click)="search()">Search</button>
   </div>

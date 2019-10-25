@@ -10,6 +10,10 @@
     .header {
       display: flex;
       justify-content: space-between;
+
+      .time-info {
+        color: $cloudy-blue;
+      }
     }
   }
 
