@@ -1,3 +1,5 @@
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CoursesPageComponent } from './courses-page.component';
@@ -8,7 +10,9 @@ describe('CoursesPageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CoursesPageComponent ]
+      declarations: [ CoursesPageComponent ],
+      schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
+      imports: [ FormsModule ]
     })
     .compileComponents();
   }));
