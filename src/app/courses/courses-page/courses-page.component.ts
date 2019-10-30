@@ -33,5 +33,4 @@ export class CoursesPageComponent implements OnInit {
   onDeleteItem(id): void {
     console.log('%cYou just deleted item with id: ' + id, 'color: green;');
   }
-
 }
