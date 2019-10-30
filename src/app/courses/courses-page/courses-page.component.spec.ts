@@ -3,6 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CoursesPageComponent } from './courses-page.component';
 import { CourseItemComponent } from '../course-item/course-item.component';
+import { TimePipe } from '../../shared/time.pipe';
 
 describe('CoursesPageComponent', () => {
   let component: CoursesPageComponent;
@@ -10,7 +11,7 @@ describe('CoursesPageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [CoursesPageComponent, CourseItemComponent],
+      declarations: [CoursesPageComponent, CourseItemComponent, TimePipe],
       imports: [FormsModule]
     })
       .compileComponents();

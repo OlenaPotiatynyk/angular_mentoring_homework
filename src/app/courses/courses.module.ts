@@ -4,9 +4,10 @@ import { FormsModule } from '@angular/forms';
 
 import { CoursesPageComponent } from './courses-page/courses-page.component';
 import { CourseItemComponent } from './course-item/course-item.component';
+import { TimePipe } from '../shared/time.pipe';
 
 @NgModule({
-  declarations: [CoursesPageComponent, CourseItemComponent],
+  declarations: [CoursesPageComponent, CourseItemComponent, TimePipe],
   imports: [
     CommonModule,
     FormsModule
