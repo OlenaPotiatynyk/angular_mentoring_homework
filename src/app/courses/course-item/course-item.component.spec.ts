@@ -5,7 +5,6 @@ import { CourseItemComponent } from './course-item.component';
 describe('CourseItemComponent', () => {
   let component: CourseItemComponent;
   let fixture: ComponentFixture<CourseItemComponent>;
-  let spy;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -17,7 +16,7 @@ describe('CourseItemComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(CourseItemComponent);
     component = fixture.componentInstance;
-    spy = spyOn(console, 'log').and.callThrough();
+    spyOn(console, 'log');
 
     component.item = {
       id: 42,
@@ -36,24 +35,22 @@ describe('CourseItemComponent', () => {
 
   describe('ngOnInit', () => {
     it('should write in console OnInit', () => {
-      expect(spy).toHaveBeenCalledWith('%cOnInit Test Name', 'color: red;');
+      expect(console.log).toHaveBeenCalledWith('%cOnInit Test Name', 'color: red;');
     });
   });
 
   describe('ngOnChanges', () => {
     it('should write in console OnChanges', () => {
-      spy.calls.reset();
       component.ngOnChanges();
-      expect(spy).toHaveBeenCalledWith('%cOnChange Test Name', 'color: purple;');
+      expect(console.log).toHaveBeenCalledWith('%cOnChange Test Name', 'color: purple;');
     });
   });
 
   describe('editItem', () => {
     it('should write in console OnInit', () => {
-      spy.calls.reset();
       const button = fixture.debugElement.nativeElement.querySelector('#edit-item');
       button.click();
-      expect(spy).toHaveBeenCalledWith(
+      expect(console.log).toHaveBeenCalledWith(
         '%cYou want to edit item with id "42", but right now it\'s not possible, wait a bit ...',
         'color: orange');
     });

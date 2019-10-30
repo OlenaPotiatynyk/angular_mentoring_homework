@@ -7,7 +7,6 @@ import { CourseItemComponent } from '../course-item/course-item.component';
 describe('CoursesPageComponent', () => {
   let component: CoursesPageComponent;
   let fixture: ComponentFixture<CoursesPageComponent>;
-  let spy;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -20,7 +19,7 @@ describe('CoursesPageComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(CoursesPageComponent);
     component = fixture.componentInstance;
-    spy = spyOn(console, 'log').and.callThrough();
+    spyOn(console, 'log').and.callThrough();
     fixture.detectChanges();
   });
 
@@ -34,7 +33,7 @@ describe('CoursesPageComponent', () => {
       component.value = 'Some test value';
       button.click();
 
-      expect(spy).toHaveBeenCalledWith('%cSome test value', 'color: crimson;');
+      expect(console.log).toHaveBeenCalledWith('%cSome test value', 'color: crimson;');
     });
 
     it('should write input value in console on Enter', () => {
@@ -43,7 +42,7 @@ describe('CoursesPageComponent', () => {
       component.value = 'Test value';
       input.dispatchEvent(event);
 
-      expect(spy).toHaveBeenCalledWith('%cTest value', 'color: crimson;');
+      expect(console.log).toHaveBeenCalledWith('%cTest value', 'color: crimson;');
     });
   });
 
@@ -52,14 +51,14 @@ describe('CoursesPageComponent', () => {
       const button = fixture.debugElement.nativeElement.querySelector('.link');
       button.click();
 
-      expect(spy).toHaveBeenCalledWith('%cYou just clicked LOAD MORE button. Well done!', 'color: chocolate;');
+      expect(console.log).toHaveBeenCalledWith('%cYou just clicked LOAD MORE button. Well done!', 'color: chocolate;');
     });
   });
 
   describe('onDeleteItem', () => {
     it('should write in console on element delete', () => {
       component.onDeleteItem(42);
-      expect(spy).toHaveBeenCalledWith('%cYou just deleted item with id: 42', 'color: green;');
+      expect(console.log).toHaveBeenCalledWith('%cYou just deleted item with id: 42', 'color: green;');
     });
   });
 });
