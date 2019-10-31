@@ -61,5 +61,32 @@ describe('CoursesPageComponent', () => {
       component.onDeleteItem(42);
       expect(console.log).toHaveBeenCalledWith('%cYou just deleted item with id: 42', 'color: green;');
     });
+
+    it('should delete selected element from array', () => {
+      component.courses = [
+        {
+          id: '42',
+          title: 'Test Name',
+          creationDate: '9 Nov, 2018',
+          duration: 88,
+          description: 'Learn about where you can find course descriptions'
+        },
+        {
+          id: '43',
+          title: 'Test Name',
+          creationDate: '9 Nov, 2018',
+          duration: 88,
+          description: 'Learn about where you can find course descriptions'
+        }
+      ];
+      component.onDeleteItem('42');
+      expect(component.courses).toEqual([{
+        id: '43',
+        title: 'Test Name',
+        creationDate: '9 Nov, 2018',
+        duration: 88,
+        description: 'Learn about where you can find course descriptions'
+      }]);
+    });
   });
 });

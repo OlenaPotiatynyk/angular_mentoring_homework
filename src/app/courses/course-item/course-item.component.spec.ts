@@ -20,7 +20,7 @@ describe('CourseItemComponent', () => {
     spyOn(console, 'log');
 
     component.item = {
-      id: 42,
+      id: '42',
       title: 'Test Name',
       creationDate: '9 Nov, 2018',
       duration: 88,
