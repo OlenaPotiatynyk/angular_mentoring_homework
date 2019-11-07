@@ -13,6 +13,10 @@
   </button>
 </div>
 
+<div *ngIf="courses.length === 0" class="container" >
+  <p>NO DATA. FEEL FRE TO ADD THE NEW COURSE</p>
+</div>
+
 <div *ngFor="let course of courses" class="container" appAddTheBorder="{{course.creationDate}}">
   <app-course-item [item]="course" (deleteItem)="onDeleteItem(course.id)"></app-course-item>
 </div>
