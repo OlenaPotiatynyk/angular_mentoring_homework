@@ -4,6 +4,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CoursesPageComponent } from './courses-page.component';
 import { CourseItemComponent } from '../course-item/course-item.component';
 import { TimePipe } from '../../shared/time.pipe';
+import { AddTheBorderDirective } from '../add-the-border.directive';
 
 describe('CoursesPageComponent', () => {
   let component: CoursesPageComponent;
@@ -11,7 +12,7 @@ describe('CoursesPageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [CoursesPageComponent, CourseItemComponent, TimePipe],
+      declarations: [CoursesPageComponent, CourseItemComponent, TimePipe, AddTheBorderDirective],
       imports: [FormsModule]
     })
       .compileComponents();
@@ -67,14 +68,14 @@ describe('CoursesPageComponent', () => {
         {
           id: '42',
           title: 'Test Name',
-          creationDate: '9 Nov, 2018',
+          creationDate: new Date('November 1, 2019 03:24:00').getTime(),
           duration: 88,
           description: 'Learn about where you can find course descriptions'
         },
         {
           id: '43',
           title: 'Test Name',
-          creationDate: '9 Nov, 2018',
+          creationDate: new Date('October 10, 2019 03:24:00').getTime(),
           duration: 88,
           description: 'Learn about where you can find course descriptions'
         }
@@ -83,7 +84,7 @@ describe('CoursesPageComponent', () => {
       expect(component.courses).toEqual([{
         id: '43',
         title: 'Test Name',
-        creationDate: '9 Nov, 2018',
+        creationDate: new Date('October 10, 2019 03:24:00').getTime(),
         duration: 88,
         description: 'Learn about where you can find course descriptions'
       }]);

@@ -13,7 +13,7 @@
   </button>
 </div>
 
-<div *ngFor="let course of courses" class="container">
+<div *ngFor="let course of courses" class="container" appAddTheBorder="{{course.creationDate}}">
   <app-course-item [item]="course" (deleteItem)="onDeleteItem(course.id)"></app-course-item>
 </div>
 
