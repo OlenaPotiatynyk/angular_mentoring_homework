@@ -1,7 +1,12 @@
 <article class="item">
   <div class="left-column">
     <div class="header">
-      <h2 class="title">{{item.title | uppercase}}</h2>
+      <h2 class="title">
+        {{item.title | uppercase}}
+        <i *ngIf="item.topRated" class="material-icons star">
+          star
+        </i>
+      </h2>
       <div class="time-info">
         <button class="button button_s">
           <i class="material-icons">

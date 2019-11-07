@@ -4,6 +4,7 @@ export default [
     title: 'Video Course 1. Name tag',
     creationDate: Date.now() - 864000000,
     duration: 88,
+    topRated: false,
     description: 'Learn about where you can find course descriptions, what information they include, how they work,' +
       ' and details about various components of a course description. Course descriptions report information about a' +
       ' university or college\'s classes. They\'re published both in course catalogs that outline degree requirements' +
@@ -14,6 +15,7 @@ export default [
     title: 'Video Course 2. Name tag',
     creationDate: Date.now() + 864000000,
     duration: 88,
+    topRated: true,
     description: 'Learn about where you can find course descriptions, what information they include, how they work,' +
       ' and details about various components of a course description. Course descriptions report information about a' +
       ' university or college\'s classes. They\'re published both in course catalogs that outline degree requirements' +
@@ -24,6 +26,7 @@ export default [
     title: 'Video Course 3. Name tag',
     creationDate: Date.now() - 1728000000,
     duration: 88,
+    topRated: false,
     description: 'Learn about where you can find course descriptions, what information they include, how they work,' +
       ' and details about various components of a course description. Course descriptions report information about a' +
       ' university or college\'s classes. They\'re published both in course catalogs that outline degree requirements' +
