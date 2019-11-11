@@ -1,7 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CourseItemComponent } from './course-item.component';
-import { TimePipe } from '../../shared/time.pipe';
+import { TimePipe } from '../../shared/pipes/time.pipe';
 
 describe('CourseItemComponent', () => {
   let component: CourseItemComponent;

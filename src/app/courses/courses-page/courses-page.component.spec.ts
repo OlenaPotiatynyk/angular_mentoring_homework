@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CoursesPageComponent } from './courses-page.component';
 import { CourseItemComponent } from '../course-item/course-item.component';
-import { TimePipe } from '../../shared/time.pipe';
+import { TimePipe } from '../../shared/pipes/time.pipe';
 import { AddTheBorderDirective } from '../add-the-border.directive';
 
 describe('CoursesPageComponent', () => {

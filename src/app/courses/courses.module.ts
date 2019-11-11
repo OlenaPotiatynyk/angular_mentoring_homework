@@ -4,11 +4,12 @@ import { FormsModule } from '@angular/forms';
 
 import { CoursesPageComponent } from './courses-page/courses-page.component';
 import { CourseItemComponent } from './course-item/course-item.component';
-import { TimePipe } from '../shared/time.pipe';
+import { TimePipe } from '../shared/pipes/time.pipe';
+import { OrderByPipe } from '../shared/pipes/order-by.pipe';
 import { AddTheBorderDirective } from './add-the-border.directive';
 
 @NgModule({
-  declarations: [CoursesPageComponent, CourseItemComponent, TimePipe, AddTheBorderDirective],
+  declarations: [CoursesPageComponent, CourseItemComponent, TimePipe, OrderByPipe, AddTheBorderDirective],
   imports: [
     CommonModule,
     FormsModule

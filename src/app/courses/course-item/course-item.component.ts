@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, OnInit, OnChanges } from '@angular/core';
-import { TimePipe } from '../../shared/time.pipe';
+import { TimePipe } from '../../shared/pipes/time.pipe';
 
 @Component({
   selector: 'app-course-item',
