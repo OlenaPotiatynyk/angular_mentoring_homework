@@ -27,7 +27,7 @@ export class CoursesPageComponent implements OnInit {
   }
 
   search(): void {
-    console.log('%c' + this.courses, 'color: crimson;');
+    console.log('%c' + this.value, 'color: crimson;');
     this.courses = this.filter.transform(this.getData(), this.value);
   }
 

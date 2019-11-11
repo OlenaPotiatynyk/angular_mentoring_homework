@@ -4,6 +4,8 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CoursesPageComponent } from './courses-page.component';
 import { CourseItemComponent } from '../course-item/course-item.component';
 import { TimePipe } from '../../shared/pipes/time.pipe';
+import { OrderByPipe } from '../../shared/pipes/order-by.pipe';
+import { FilterPipe } from '../../shared/pipes/filter.pipe';
 import { AddTheBorderDirective } from '../add-the-border.directive';
 
 describe('CoursesPageComponent', () => {
@@ -12,8 +14,16 @@ describe('CoursesPageComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [CoursesPageComponent, CourseItemComponent, TimePipe, AddTheBorderDirective],
-      imports: [FormsModule]
+      declarations: [
+        CoursesPageComponent,
+        CourseItemComponent,
+        TimePipe,
+        OrderByPipe,
+        FilterPipe,
+        AddTheBorderDirective
+      ],
+      imports: [FormsModule],
+      providers: [FilterPipe]
     })
       .compileComponents();
   }));
@@ -70,6 +80,7 @@ describe('CoursesPageComponent', () => {
           title: 'Test Name',
           creationDate: new Date('November 1, 2019 03:24:00').getTime(),
           duration: 88,
+          topRated: true,
           description: 'Learn about where you can find course descriptions'
         },
         {
@@ -77,6 +88,7 @@ describe('CoursesPageComponent', () => {
           title: 'Test Name',
           creationDate: new Date('October 10, 2019 03:24:00').getTime(),
           duration: 88,
+          topRated: false,
           description: 'Learn about where you can find course descriptions'
         }
       ];
@@ -86,6 +98,7 @@ describe('CoursesPageComponent', () => {
         title: 'Test Name',
         creationDate: new Date('October 10, 2019 03:24:00').getTime(),
         duration: 88,
+        topRated: false,
         description: 'Learn about where you can find course descriptions'
       }]);
     });
