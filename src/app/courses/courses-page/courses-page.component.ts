@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserModel } from '../../shared/user.model';
 import { CourseModel } from '../../shared/course.model';
 import mockData from '../../shared/mockData';
+import { FilterPipe } from '../../shared/pipes/filter.pipe';
 
 @Component({
   selector: 'app-courses-page',
@@ -13,17 +14,21 @@ export class CoursesPageComponent implements OnInit {
   public value = '';
 
   private users: UserModel[];
-  private fakeValue: number;
+  private savedData: any[];
 
-  constructor() { }
+  constructor(private filter: FilterPipe) { }
 
   ngOnInit(): void {
-    this.fakeValue = Math.random();
-    console.log(this.fakeValue);
+    this.savedData = this.courses;
+  }
+
+  getData(): any {
+    return this.savedData;
   }
 
   search(): void {
-    console.log('%c' + this.value, 'color: crimson;');
+    console.log('%c' + this.courses, 'color: crimson;');
+    this.courses = this.filter.transform(this.getData(), this.value);
   }
 
   loadMoreHandler(): void {
