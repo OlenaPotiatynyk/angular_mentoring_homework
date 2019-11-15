@@ -76,7 +76,7 @@ describe('CoursesPageComponent', () => {
     it('should delete selected element from array', () => {
       component.courses = [
         {
-          id: '42',
+          id: 42,
           title: 'Test Name',
           creationDate: new Date('November 1, 2019 03:24:00').getTime(),
           duration: 88,
@@ -84,7 +84,7 @@ describe('CoursesPageComponent', () => {
           description: 'Learn about where you can find course descriptions'
         },
         {
-          id: '43',
+          id: 43,
           title: 'Test Name',
           creationDate: new Date('October 10, 2019 03:24:00').getTime(),
           duration: 88,
@@ -92,9 +92,9 @@ describe('CoursesPageComponent', () => {
           description: 'Learn about where you can find course descriptions'
         }
       ];
-      component.onDeleteItem('42');
+      component.onDeleteItem(42);
       expect(component.courses).toEqual([{
-        id: '43',
+        id: 43,
         title: 'Test Name',
         creationDate: new Date('October 10, 2019 03:24:00').getTime(),
         duration: 88,
