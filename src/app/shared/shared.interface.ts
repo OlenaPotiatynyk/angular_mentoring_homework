@@ -1,5 +1,5 @@
 export interface CourseInterface {
-  id: string;
+  id: number;
   title: string;
   creationDate: number;
   duration: number;
@@ -8,7 +8,7 @@ export interface CourseInterface {
 }
 
 export interface UserInterface {
-  id: string;
+  id: number;
   firstName: string;
   lastName: string;
 }

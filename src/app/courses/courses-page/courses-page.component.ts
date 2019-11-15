@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UserModel } from '../../shared/user.model';
 import { CourseModel } from '../../shared/course.model';
-import mockData from '../../shared/mockData';
 import { FilterPipe } from '../../shared/pipes/filter.pipe';
+import { CoursesService } from '../courses.service';
 
 @Component({
   selector: 'app-courses-page',
@@ -10,35 +10,34 @@ import { FilterPipe } from '../../shared/pipes/filter.pipe';
   styleUrls: ['./courses-page.component.scss']
 })
 export class CoursesPageComponent implements OnInit {
-  public courses: CourseModel[] = mockData;
+  public courses: CourseModel[] = [];
   public value = '';
 
   private users: UserModel[];
-  private savedData: any[];
 
-  constructor(private filter: FilterPipe) { }
+  constructor(private filter: FilterPipe, private coursesService: CoursesService) { }
 
   ngOnInit(): void {
-    this.savedData = this.courses;
-  }
-
-  getData(): any {
-    return this.savedData;
+    this.courses = this.coursesService.getList();
   }
 
   search(): void {
-    console.log('%c' + this.value, 'color: crimson;');
-    this.courses = this.filter.transform(this.getData(), this.value);
+    this.courses = this.filter.transform(this.coursesService.getList(), this.value);
+  }
+
+  addCourse(): void {
+    this.coursesService.createCourse();
   }
 
   loadMoreHandler(): void {
     console.log('%cYou just clicked LOAD MORE button. Well done!', 'color: chocolate;');
   }
 
-  onDeleteItem(id): void {
-    console.log('%cYou just deleted item with id: ' + id, 'color: green;');
-    this.courses = this.courses.filter((item) => {
-      return item.id !== id;
-    });
+  onDeleteItem(id: number): void {
+    const isConfirmed = confirm('Do you really want to delete this course?');
+    if (isConfirmed) {
+      this.coursesService.removeItem(id);
+      this.courses = this.coursesService.getList();
+    }
   }
 }
