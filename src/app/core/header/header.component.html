@@ -1,14 +1,14 @@
 <div class="header-wrapper">
   <app-logo class="logo-wrapper"></app-logo>
   <div class="login-menu">
-    <button class="login-menu__element button">
+    <button class="login-menu__element button" (click)="logIn()">
       <i class="material-icons">
         person
       </i>
       <span>User login</span>
     </button>
 
-    <button class="login-menu__element button">
+    <button class="login-menu__element button" (click)="logOut()">
       <i class="material-icons">
         exit_to_app
       </i>
