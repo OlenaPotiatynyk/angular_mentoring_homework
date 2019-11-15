@@ -12,11 +12,9 @@ export class CourseItemComponent implements OnInit, OnChanges {
   constructor() { }
 
   ngOnInit(): void {
-    console.log('%cOnInit ' + this.item.title, 'color: red;');
   }
 
   ngOnChanges(): void {
-    console.log('%cOnChange ' + this.item.title, 'color: purple;');
   }
 
   editItem(): void {

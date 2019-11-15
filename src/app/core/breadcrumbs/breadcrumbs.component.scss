@@ -1,6 +1,9 @@
 .breadcrumbs-wrapper {
+  position: absolute;
   height: 64px;
+  width: 100%;
   padding: 10px 85px;
+  background-color: white;
 
   .breadcrumbs {
     font-size: 14px;

@@ -35,6 +35,11 @@ export class AuthService {
   }
 
   getUserInfo(): string {
-    return localStorage.getItem('user').match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi)[0];
+    const user = localStorage.getItem('user');
+    if (user) {
+      return user.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi)[0];
+    } else {
+      return '';
+    }
   }
 }

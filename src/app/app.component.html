@@ -1,9 +1,10 @@
 <app-header></app-header>
 
-<app-breadcrumbs></app-breadcrumbs>
+<app-breadcrumbs *ngIf="userIsAuthorised()"></app-breadcrumbs>
 
 <div class="content-wrapper">
-  <router-outlet></router-outlet>
+  <router-outlet *ngIf="userIsAuthorised()"></router-outlet>
+  <app-login-page *ngIf="!userIsAuthorised()"></app-login-page>
 </div>
 
 <app-footer></app-footer>

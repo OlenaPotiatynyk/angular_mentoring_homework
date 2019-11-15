@@ -1,8 +1,8 @@
 @import './common-styles/variables';
 
 .content-wrapper {
-  min-height: calc(100vh - 64px - 64px - 64px); // -header, - breadcrumbs, -footer
-  padding: 24px 85px 10px;
+  min-height: calc(100vh - 64px - 64px); // -header, -footer
+  padding: 88px 85px 10px;
   margin-bottom: 64px;
   background-color: $pale-grey;
 }
