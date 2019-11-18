@@ -7,7 +7,7 @@ export class AuthService {
 
   constructor() { }
 
-  login() {
+  login(): void {
     if (this.isAuthenticated()) {
       return;
     }
@@ -21,7 +21,7 @@ export class AuthService {
     console.log('log in successfully');
   }
 
-  logout() {
+  logout(): void {
     if (!this.isAuthenticated()) {
       return;
     }

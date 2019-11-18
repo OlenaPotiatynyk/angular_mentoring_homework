@@ -62,15 +62,15 @@ export class CoursesService {
     this.courses.push(newItem);
   }
 
-  private getItemById(id: number): CourseModel {
-    return this.courses.find(item => item.id === id);
-  }
-
-  updateItem(id: number) {
+  updateItem(id: number): void {
 
   }
 
   removeItem(id: number): void {
     this.courses = this.courses.filter(item => item.id !== id);
+  }
+
+  private getItemById(id: number): CourseModel {
+    return this.courses.find(item => item.id === id);
   }
 }

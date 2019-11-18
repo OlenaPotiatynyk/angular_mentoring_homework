@@ -1,21 +1,15 @@
-import { Component, Input, Output, EventEmitter, OnInit, OnChanges } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-course-item',
   templateUrl: './course-item.component.html',
   styleUrls: ['./course-item.component.scss']
 })
-export class CourseItemComponent implements OnInit, OnChanges {
+export class CourseItemComponent {
   @Input() item: any;
   @Output() deleteItem = new EventEmitter();
 
   constructor() { }
-
-  ngOnInit(): void {
-  }
-
-  ngOnChanges(): void {
-  }
 
   editItem(): void {
     console.log('%cYou want to edit item with id "' +
