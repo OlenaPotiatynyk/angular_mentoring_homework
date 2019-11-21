@@ -111,3 +111,54 @@ h6 {
 .star {
   color: gold;
 }
+
+.input-group {
+  margin: 10px 0;
+  color: $slate-grey;
+
+  &_full-size {
+    width: 100%;
+  }
+
+  &_semi-size {
+    width: 50%;
+  }
+
+  &_small-size {
+    width: 25%;
+  }
+
+  label {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+
+    span {
+      font-size: 12px;
+      color: darkgray;
+    }
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    border-radius: 3px;
+    border: solid 1px $light-grayish-blue;
+    background-color: $white;
+    padding: 0 12px;
+    margin: 8px 0;
+
+    &::placeholder {
+      color: darkgray;
+    }
+  }
+
+  input {
+    height: 36px;
+  }
+
+  textarea {
+    height: 108px;
+    padding: 12px;
+  }
+}

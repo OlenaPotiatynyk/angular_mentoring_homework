@@ -11,9 +11,23 @@ import { FilterPipe } from '../shared/pipes/filter.pipe';
 
 import { AddTheBorderDirective } from './add-the-border.directive';
 import { AddCoursePageComponent } from './add-course-page/add-course-page.component';
+import { InputDateComponent } from '../shared/input-date/input-date.component';
+import { InputDurationComponent } from '../shared/input-duration/input-duration.component';
+import { InputTagComponent } from '../shared/input-tag/input-tag.component';
 
 @NgModule({
-  declarations: [CoursesPageComponent, CourseItemComponent, TimePipe, OrderByPipe, FilterPipe, AddTheBorderDirective, AddCoursePageComponent],
+  declarations: [
+    CoursesPageComponent,
+    CourseItemComponent,
+    TimePipe,
+    OrderByPipe,
+    FilterPipe,
+    AddTheBorderDirective,
+    AddCoursePageComponent,
+    InputDateComponent,
+    InputDurationComponent,
+    InputTagComponent
+  ],
   imports: [
     CommonModule,
     FormsModule

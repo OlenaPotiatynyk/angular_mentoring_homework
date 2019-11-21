@@ -2,31 +2,22 @@
   <h2>New course</h2>
   <div class="input-group input-group_full-size">
     <label for="title">Title:<span>*required</span></label>
-    <input id="title" placeholder="Text input" required>
+    <input id="title" [(ngModel)]="title" placeholder="Text input" required>
   </div>
 
   <div class="input-group input-group_full-size">
     <label for="description">Description:<span>*required</span></label>
-    <textarea id="description" placeholder="Add description" required></textarea>
+    <textarea id="description" [(ngModel)]="description" placeholder="Add description" required></textarea>
   </div>
 
-  <div class="input-group input-group_small-size">
-    <label for="duration">Duration:<span>*required</span></label>
-    <input id="duration" type="number" placeholder="minutes" required>
-  </div>
+  <app-input-date [date]="date" (input)="date=$event.target.value"></app-input-date>
 
-  <div class="input-group input-group_small-size">
-    <label for="date">Date:<span>*required</span></label>
-    <input id="date" type="date" required>
-  </div>
+  <app-input-duration [duration]="duration" (input)="duration=$event.target.value"></app-input-duration>
 
-  <div class="input-group input-group_semi-size">
-    <label for="authors">Authors:<span>*required</span></label>
-    <input id="authors" type="text" placeholder="Start typing" required>
-  </div>
+  <app-input-tag [authors]="authors" (input)="authors=$event.target.value"></app-input-tag>
 
   <div class="footer">
     <button type="cancel" class="button button_m button_cancel">Cancel</button>
-    <button type="submit" class="button button_m button_ok">Login</button>
+    <button type="submit" class="button button_m button_ok" (click)="submit()">Login</button>
   </div>
 </div>
