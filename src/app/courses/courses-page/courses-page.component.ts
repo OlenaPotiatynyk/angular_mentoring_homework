@@ -40,4 +40,8 @@ export class CoursesPageComponent implements OnInit {
       this.courses = this.coursesService.getList();
     }
   }
+
+  onEditItem(id: number): void {
+    console.log(id);
+  }
 }

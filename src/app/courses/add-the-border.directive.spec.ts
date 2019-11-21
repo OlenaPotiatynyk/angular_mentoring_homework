@@ -7,8 +7,9 @@ describe('AddTheBorderDirective', () => {
   let fixture;
   let debugElement;
 
-  const freshCourseDate = 1572270912683;
-  const upcomingCourseDate = 1574007341695;
+  const twoDaysInMilliseconds = 172800000;
+  const freshCourseDate = Date.now() - twoDaysInMilliseconds;
+  const upcomingCourseDate =  Date.now() + twoDaysInMilliseconds;
   const colorGreen = 'rgb(155, 200, 55)';
   const colorBlue = 'rgb(48, 182, 221)';
 

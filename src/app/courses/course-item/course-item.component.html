@@ -28,12 +28,12 @@
   </div>
   <div class="right-column">
     <div class="action-bar">
-      <button id="edit-item" class="button button_s button_action" (click)="editItem()">
+      <button id="edit-item" class="button button_s button_action" (click)="edit()">
         <i class="material-icons">edit</i>
         <span>Edit</span>
       </button>
 
-      <button class="button button_s button_action" (click)="deleteItem.emit()">
+      <button id="delete-item" class="button button_s button_action" (click)="delete()">
         <i class="material-icons">delete</i>
         <span>Delete</span>
       </button>

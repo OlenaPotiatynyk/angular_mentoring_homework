@@ -17,13 +17,13 @@ describe('CourseItemComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(CourseItemComponent);
     component = fixture.componentInstance;
-    spyOn(console, 'log');
 
     component.item = {
-      id: '42',
+      id: 42,
       title: 'Test Name',
-      creationDate: '9 Nov, 2018',
+      creationDate: Date.now(),
       duration: 88,
+      topRated: false,
       description: 'Learn about where you can find course descriptions'
     };
 
@@ -34,26 +34,21 @@ describe('CourseItemComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('ngOnInit', () => {
-    it('should write in console OnInit', () => {
-      expect(console.log).toHaveBeenCalledWith('%cOnInit Test Name', 'color: red;');
-    });
-  });
-
-  describe('ngOnChanges', () => {
-    it('should write in console OnChanges', () => {
-      component.ngOnChanges();
-      expect(console.log).toHaveBeenCalledWith('%cOnChange Test Name', 'color: purple;');
-    });
-  });
-
-  describe('editItem', () => {
-    it('should write in console OnInit', () => {
+  describe('edit', () => {
+    it('should emit function', () => {
+      spyOn(component.editItem, 'emit');
       const button = fixture.debugElement.nativeElement.querySelector('#edit-item');
       button.click();
-      expect(console.log).toHaveBeenCalledWith(
-        '%cYou want to edit item with id "42", but right now it\'s not possible, wait a bit ...',
-        'color: orange');
+      expect(component.editItem.emit).toHaveBeenCalled();
+    });
+  });
+
+  describe('delete', () => {
+    it('should write in console OnInit', () => {
+      spyOn(component.deleteItem, 'emit');
+      const button = fixture.debugElement.nativeElement.querySelector('#delete-item');
+      button.click();
+      expect(component.deleteItem.emit).toHaveBeenCalled();
     });
   });
 });

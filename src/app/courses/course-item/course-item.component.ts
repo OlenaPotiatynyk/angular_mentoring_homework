@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { CourseInterface } from '../../shared/shared.interface';
 
 @Component({
   selector: 'app-course-item',
@@ -6,14 +7,18 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./course-item.component.scss']
 })
 export class CourseItemComponent {
-  @Input() item: any;
+  @Input() item: CourseInterface;
+  @Output() editItem = new EventEmitter();
   @Output() deleteItem = new EventEmitter();
 
   constructor() { }
 
-  editItem(): void {
-    console.log('%cYou want to edit item with id "' +
-      this.item.id + '", but right now it\'s not possible, wait a bit ...', 'color: orange');
+  edit(): void {
+    this.editItem.emit();
+  }
+
+  delete(): void {
+    this.deleteItem.emit();
   }
 
 }

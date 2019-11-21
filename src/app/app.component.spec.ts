@@ -5,19 +5,23 @@ import { HeaderComponent } from './core/header/header.component';
 import { FooterComponent } from './core/footer/footer.component';
 import { BreadcrumbsComponent } from './core/breadcrumbs/breadcrumbs.component';
 import { LogoComponent } from './core/logo/logo.component';
+import { LoginPageComponent } from './login-page/login-page.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule
+        RouterTestingModule,
+        ReactiveFormsModule
       ],
       declarations: [
         AppComponent,
         HeaderComponent,
         LogoComponent,
         BreadcrumbsComponent,
-        FooterComponent
+        FooterComponent,
+        LoginPageComponent
       ]
     }).compileComponents();
   }));
