@@ -12,6 +12,7 @@ import { CoursesService } from '../courses.service';
 export class CoursesPageComponent implements OnInit {
   public courses: CourseModel[] = [];
   public value = '';
+  public addCourseMode = false;
 
   private users: UserModel[];
 
@@ -26,7 +27,8 @@ export class CoursesPageComponent implements OnInit {
   }
 
   addCourse(): void {
-    this.coursesService.createCourse();
+    this.addCourseMode = true;
+    // this.coursesService.createCourse();
   }
 
   loadMoreHandler(): void {
