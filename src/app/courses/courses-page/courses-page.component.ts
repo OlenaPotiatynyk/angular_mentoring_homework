@@ -28,7 +28,6 @@ export class CoursesPageComponent implements OnInit {
 
   addCourse(): void {
     this.addCourseMode = true;
-    // this.coursesService.createCourse();
   }
 
   loadMoreHandler(): void {

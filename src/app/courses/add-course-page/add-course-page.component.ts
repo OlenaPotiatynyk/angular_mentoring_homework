@@ -1,4 +1,5 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { CoursesService } from '../courses.service';
 
 @Component({
   selector: 'app-add-course-page',
@@ -14,14 +15,22 @@ export class AddCoursePageComponent implements OnInit {
   duration = '';
   authors = '';
 
-  constructor() { }
+  constructor(private coursesService: CoursesService) { }
 
   ngOnInit() {
   }
 
   onSubmit(): void {
-    console.log('Title: ' + this.title + ' Description: '
-      + this.description + ' Date: ' + this.date + ' Duration: ' + this.duration + ' Author: ' + this.authors);
+    const data = {
+      title: this.title,
+      description: this.description,
+      date: this.date,
+      duration: this.duration,
+      authors: this.authors
+    };
+
+    this.coursesService.createCourse(data);
+    this.onCancel();
   }
 
   onCancel(): void {

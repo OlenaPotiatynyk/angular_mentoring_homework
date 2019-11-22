@@ -50,14 +50,16 @@ export class CoursesService {
     return this.courses;
   }
 
-  createCourse(): void {
+  createCourse(data): void {
     const newItem = {
       id: this.courses.length + 1,
-      title: 'NEW COURSE',
+      title: data.title,
       creationDate: Date.now(),
-      duration: 0,
+      date: data.date,
+      duration: data.duration,
       topRated: false,
-      description: 'WRITE HERE YOUR DESCRIPTION'
+      description: data.description,
+      authors: data.authors
     };
     this.courses.push(newItem);
   }
