@@ -1,4 +1,4 @@
-<app-add-course-page *ngIf="addCourseMode"></app-add-course-page>
+<app-add-course-page *ngIf="addCourseMode" (cancel)="addCourseMode = false"></app-add-course-page>
 
 <div *ngIf="!addCourseMode">
   <div class="search">

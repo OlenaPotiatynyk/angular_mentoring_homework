@@ -1,4 +1,7 @@
-<div class="input-group input-group_small-size">
-  <label for="duration">Duration:<span>*required</span></label>
-  <input id="duration" type="number" placeholder="minutes" required>
+<div class="input-group input-group_semi-size">
+  <label for="duration" class="label-row">Duration:<span>*required</span></label>
+  <div class="row">
+    <input id="duration" type="number" placeholder="minutes" required>
+    <span>{{ duration | time }}</span>
+  </div>
 </div>
