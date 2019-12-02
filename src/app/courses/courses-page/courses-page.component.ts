@@ -44,6 +44,6 @@ export class CoursesPageComponent implements OnInit {
   }
 
   onEditItem(id: number): void {
-    console.log(id);
+    this.router.navigate(['courses/', id]);
   }
 }

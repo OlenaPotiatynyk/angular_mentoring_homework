@@ -10,11 +10,11 @@ import { OrderByPipe } from '../shared/pipes/order-by.pipe';
 import { FilterPipe } from '../shared/pipes/filter.pipe';
 
 import { AddTheBorderDirective } from './add-the-border.directive';
-import { AddCoursePageComponent } from './add-course-page/add-course-page.component';
+import { AddAndEditCoursePageComponent } from './add-and-edit-course-page/add-and-edit-course-page.component';
 import { InputDateComponent } from '../shared/input-date/input-date.component';
 import { InputDurationComponent } from '../shared/input-duration/input-duration.component';
 import { InputTagComponent } from '../shared/input-tag/input-tag.component';
-import {RouterModule} from "@angular/router";
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -24,7 +24,7 @@ import {RouterModule} from "@angular/router";
     OrderByPipe,
     FilterPipe,
     AddTheBorderDirective,
-    AddCoursePageComponent,
+    AddAndEditCoursePageComponent,
     InputDateComponent,
     InputDurationComponent,
     InputTagComponent
