@@ -14,6 +14,7 @@ import { AddCoursePageComponent } from './add-course-page/add-course-page.compon
 import { InputDateComponent } from '../shared/input-date/input-date.component';
 import { InputDurationComponent } from '../shared/input-duration/input-duration.component';
 import { InputTagComponent } from '../shared/input-tag/input-tag.component';
+import {RouterModule} from "@angular/router";
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { InputTagComponent } from '../shared/input-tag/input-tag.component';
   ],
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    RouterModule
   ],
   exports: [
     CoursesPageComponent,

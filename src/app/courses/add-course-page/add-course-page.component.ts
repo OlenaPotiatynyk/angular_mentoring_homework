@@ -1,4 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+
 import { CoursesService } from '../courses.service';
 
 @Component({
@@ -6,19 +8,14 @@ import { CoursesService } from '../courses.service';
   templateUrl: './add-course-page.component.html',
   styleUrls: ['./add-course-page.component.scss']
 })
-export class AddCoursePageComponent implements OnInit {
-  @Output() cancel = new EventEmitter();
-
+export class AddCoursePageComponent {
   title = '';
   description = '';
   date = '';
   duration = '';
   authors = '';
 
-  constructor(private coursesService: CoursesService) { }
-
-  ngOnInit() {
-  }
+  constructor(private coursesService: CoursesService, private router: Router) { }
 
   onSubmit(): void {
     const data = {
@@ -30,10 +27,6 @@ export class AddCoursePageComponent implements OnInit {
     };
 
     this.coursesService.createCourse(data);
-    this.onCancel();
-  }
-
-  onCancel(): void {
-    this.cancel.emit();
+    this.router.navigate(['courses']);
   }
 }

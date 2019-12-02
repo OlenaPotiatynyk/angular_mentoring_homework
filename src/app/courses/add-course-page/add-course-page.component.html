@@ -17,7 +17,7 @@
   <app-input-tag [authors]="authors" (input)="authors=$event.target.value"></app-input-tag>
 
   <div class="footer">
-    <button type="cancel" class="button button_m button_cancel" (click)="onCancel()">Cancel</button>
+    <button type="cancel" class="button button_m button_cancel" routerLink="/courses">Cancel</button>
     <button type="submit" class="button button_m button_ok" (click)="onSubmit()">Save</button>
   </div>
 </div>

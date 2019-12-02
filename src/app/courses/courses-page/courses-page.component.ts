@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
 import { UserModel } from '../../shared/user.model';
 import { CourseModel } from '../../shared/course.model';
 import { FilterPipe } from '../../shared/pipes/filter.pipe';
@@ -12,11 +14,10 @@ import { CoursesService } from '../courses.service';
 export class CoursesPageComponent implements OnInit {
   public courses: CourseModel[] = [];
   public value = '';
-  public addCourseMode = false;
 
   private users: UserModel[];
 
-  constructor(private filter: FilterPipe, private coursesService: CoursesService) { }
+  constructor(private filter: FilterPipe, private coursesService: CoursesService, private router: Router) { }
 
   ngOnInit(): void {
     this.courses = this.coursesService.getList();
@@ -27,7 +28,7 @@ export class CoursesPageComponent implements OnInit {
   }
 
   addCourse(): void {
-    this.addCourseMode = true;
+    this.router.navigate(['courses/new']);
   }
 
   loadMoreHandler(): void {
