@@ -40,7 +40,7 @@ export class AddAndEditCoursePageComponent implements OnInit {
       authors: this.authors
     };
 
-    this.coursesService.createCourse(data);
+    this.routeParams.id ? this.coursesService.updateItem(this.routeParams.id, data) : this.coursesService.createCourse(data);
     this.router.navigate(['courses']);
   }
 

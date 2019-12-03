@@ -68,8 +68,20 @@ export class CoursesService {
     return this.courses.find(item => item.id === id);
   }
 
-  updateItem(id: number): void {
+  updateItem(id, data): void {
+    this.removeItem(id);
 
+    const updatedItem = {
+      id,
+      title: data.title,
+      creationDate: Date.now(),
+      date: data.date,
+      duration: data.duration,
+      topRated: false,
+      description: data.description,
+      authors: data.authors
+    };
+    this.courses.push(updatedItem);
   }
 
   removeItem(id: number): void {

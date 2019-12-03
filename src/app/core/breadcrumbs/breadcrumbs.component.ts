@@ -19,10 +19,6 @@ export class BreadcrumbsComponent implements OnInit {
       this.breadcrumbs = [];
       this.parseRoute(this.router.routerState.snapshot.root);
     });
-
-    this.activatedRoute.params.subscribe((routeParams) => {
-      console.log(Number.parseInt(routeParams.id));
-    });
   }
 
   private parseRoute(node: ActivatedRouteSnapshot) {
@@ -43,5 +39,7 @@ export class BreadcrumbsComponent implements OnInit {
     if (node.firstChild) {
       this.parseRoute(node.firstChild);
     }
+
+    console.log(this.breadcrumbs);
   }
 }

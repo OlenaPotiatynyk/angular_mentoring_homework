@@ -16,8 +16,8 @@ export class LoginPageComponent {
   constructor(private authService: AuthService) { }
 
   onSubmit(): void {
-    console.log(this.loginForm);
-    this.authService.login();
+    console.log('login form: ' + this.loginForm.value.email + ' ' + this.loginForm.value.password);
+    this.authService.login(this.loginForm.value);
   }
 
 }

@@ -5,21 +5,23 @@ import { Router } from '@angular/router';
   providedIn: 'root'
 })
 export class AuthService {
+  redirectUrl: string;
 
   constructor(private router: Router) { }
 
-  login(): void {
+  login(data): void {
     if (this.isAuthenticated()) {
       return;
     }
 
     const userData = {
-      email: 'test@mail.com',
-      password: '',
+      email: data.email,
+      password: data.password,
       token: Math.random()
     };
     localStorage.setItem('user', JSON.stringify(userData));
     console.log('log in successfully');
+    this.router.navigate(['courses']);
   }
 
   logout(): void {
@@ -29,6 +31,7 @@ export class AuthService {
 
     localStorage.removeItem('user');
     console.log('log out successfully');
+    this.router.navigate(['login']);
   }
 
   isAuthenticated(): boolean {

@@ -12,6 +12,10 @@
     margin: 20px 0;
     color: $slate-grey;
 
+    label {
+      display: block;
+    }
+
     input {
       width: 320px;
       height: 36px;
