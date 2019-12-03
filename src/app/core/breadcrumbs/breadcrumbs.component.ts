@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ActivatedRouteSnapshot, Router, UrlSegment } from '@angular/router';
+import { ActivatedRouteSnapshot, Router, UrlSegment } from '@angular/router';
 
 @Component({
   selector: 'app-breadcrumbs',
@@ -12,7 +12,7 @@ export class BreadcrumbsComponent implements OnInit {
     url: string
   }[] = [];
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute) { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
     this.router.events.subscribe(event => {
@@ -39,7 +39,5 @@ export class BreadcrumbsComponent implements OnInit {
     if (node.firstChild) {
       this.parseRoute(node.firstChild);
     }
-
-    console.log(this.breadcrumbs);
   }
 }
