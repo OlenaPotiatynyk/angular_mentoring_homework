@@ -8,10 +8,11 @@ import { AddAndEditCoursePageComponent } from './courses/add-and-edit-course-pag
 const routes: Routes = [
   {
     path: 'courses',
+    data: { breadcrumb: 'Courses'},
     children: [
-      {path: '', component: CoursesPageComponent},
-      {path: 'new', component: AddAndEditCoursePageComponent},
-      {path: ':id', component: AddAndEditCoursePageComponent}
+      {path: '', component: CoursesPageComponent, data: { breadcrumb: null}},
+      {path: 'new', component: AddAndEditCoursePageComponent, data: { breadcrumb: 'New'}},
+      {path: ':id', component: AddAndEditCoursePageComponent, data: { breadcrumb: 'Name'}}
     ]
   },
   {
@@ -26,7 +27,8 @@ const routes: Routes = [
   },
   {
     path: '**',
-    component: PageNotFoundComponent
+    component: PageNotFoundComponent,
+    data: { breadcrumb: 'Page not found'}
   }
 ];
 

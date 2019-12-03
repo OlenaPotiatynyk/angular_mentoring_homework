@@ -1,5 +1,5 @@
 <div class="container">
-  <h2>New course</h2>
+  <h2 *ngIf="!routeParams.id">New course</h2>
   <div class="input-group input-group_full-size">
     <label for="title">Title:<span>*required</span></label>
     <input id="title" [(ngModel)]="title" placeholder="Text input" required>
