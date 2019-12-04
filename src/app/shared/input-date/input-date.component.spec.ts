@@ -16,6 +16,9 @@ describe('InputDateComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(InputDateComponent);
     component = fixture.componentInstance;
+
+    component.creationDate = '2017-01-01';
+
     fixture.detectChanges();
   });
 
