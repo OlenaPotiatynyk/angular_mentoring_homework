@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, Output} from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-input-date',
@@ -6,11 +6,16 @@ import {Component, Input, OnInit, Output} from '@angular/core';
   styleUrls: ['./input-date.component.scss']
 })
 export class InputDateComponent implements OnInit {
-  @Input() date;
+  @Input() creationDate: string;
 
   constructor() { }
 
   ngOnInit() {
+    this.formatDate();
+  }
+
+  private formatDate(): void {
+    this.creationDate = new Date(Number.parseInt(this.creationDate)).toISOString().split('T')[0];
   }
 
 }

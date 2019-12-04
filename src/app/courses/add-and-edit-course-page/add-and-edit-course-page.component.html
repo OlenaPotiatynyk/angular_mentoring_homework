@@ -10,7 +10,7 @@
     <textarea id="description" [(ngModel)]="description" placeholder="Add description" required></textarea>
   </div>
 
-  <app-input-date [date]="date" (input)="date=$event.target.value"></app-input-date>
+  <app-input-date [creationDate]="creationDate" (input)="creationDate=$event.target.value"></app-input-date>
 
   <app-input-duration [duration]="duration" (input)="duration=$event.target.value"></app-input-duration>
 

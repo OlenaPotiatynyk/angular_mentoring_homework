@@ -11,7 +11,7 @@ import { CoursesService } from '../courses.service';
 export class AddAndEditCoursePageComponent implements OnInit {
   title = '';
   description = '';
-  date = '';
+  creationDate = '';
   duration = '';
   authors = '';
 
@@ -35,7 +35,7 @@ export class AddAndEditCoursePageComponent implements OnInit {
     const data = {
       title: this.title,
       description: this.description,
-      date: this.date,
+      creationDate: this.creationDate,
       duration: this.duration,
       authors: this.authors
     };
@@ -50,7 +50,7 @@ export class AddAndEditCoursePageComponent implements OnInit {
     if (editItem) {
       this.title = editItem.title;
       this.description = editItem.description;
-      this.date = editItem.creationDate.toString();
+      this.creationDate = editItem.creationDate.toString();
       this.duration = editItem.duration.toString();
     }
   }

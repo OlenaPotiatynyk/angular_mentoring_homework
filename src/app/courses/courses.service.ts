@@ -54,8 +54,7 @@ export class CoursesService {
     const newItem = {
       id: this.courses.length + 1,
       title: data.title,
-      creationDate: Date.now(),
-      date: data.date,
+      creationDate: data.creationDate,
       duration: data.duration,
       topRated: false,
       description: data.description,
@@ -74,8 +73,7 @@ export class CoursesService {
     const updatedItem = {
       id,
       title: data.title,
-      creationDate: Date.now(),
-      date: data.date,
+      creationDate: data.creationDate,
       duration: data.duration,
       topRated: false,
       description: data.description,
