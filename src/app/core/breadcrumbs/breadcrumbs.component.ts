@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRouteSnapshot, Router, UrlSegment } from '@angular/router';
+import { CoursesService } from '../../courses/courses.service';
 
 @Component({
   selector: 'app-breadcrumbs',
@@ -12,7 +13,7 @@ export class BreadcrumbsComponent implements OnInit {
     url: string
   }[] = [];
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private coursesService: CoursesService) { }
 
   ngOnInit() {
     this.router.events.subscribe(event => {
@@ -32,12 +33,17 @@ export class BreadcrumbsComponent implements OnInit {
         return urlSegment.path;
       }).join('/');
       this.breadcrumbs.push({
-        name: node.data['breadcrumb'],
+        name: this.resolveNameWhenPathIsId(node, urlSegments),
         url: '/' + url
       });
     }
     if (node.firstChild) {
       this.parseRoute(node.firstChild);
     }
+  }
+
+  private resolveNameWhenPathIsId(node, urlSegments): string {
+    const courseId = urlSegments[1] && urlSegments[1].path && Number.parseInt(urlSegments[1].path);
+    return courseId ? this.coursesService.getItemById(courseId).title : node.data['breadcrumb'];
   }
 }
