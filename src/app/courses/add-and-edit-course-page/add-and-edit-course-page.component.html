@@ -2,7 +2,7 @@
   <h2 *ngIf="!routeParams.id">New course</h2>
   <div class="input-group input-group_full-size">
     <label for="title">Title:<span>*required</span></label>
-    <input id="title" [(ngModel)]="title" placeholder="Text input" required>
+    <input id="title" [(ngModel)]="name" placeholder="Text input" required>
   </div>
 
   <div class="input-group input-group_full-size">
@@ -10,9 +10,9 @@
     <textarea id="description" [(ngModel)]="description" placeholder="Add description" required></textarea>
   </div>
 
-  <app-input-date [creationDate]="creationDate" (input)="creationDate=$event.target.value"></app-input-date>
+  <app-input-date [creationDate]="date" (input)="date=$event.target.value"></app-input-date>
 
-  <app-input-duration [duration]="duration" (input)="duration=$event.target.value"></app-input-duration>
+  <app-input-duration [duration]="length" (input)="length=$event.target.value"></app-input-duration>
 
   <app-input-tag [authors]="authors" (input)="authors=$event.target.value"></app-input-tag>
 

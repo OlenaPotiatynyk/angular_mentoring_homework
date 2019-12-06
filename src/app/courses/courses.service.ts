@@ -1,85 +1,54 @@
 import { Injectable } from '@angular/core';
-import { CourseModel } from '../shared/course.model';
+import { CourseModel } from '../shared/models/course.model';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+
+const BO_URL = 'http://localhost:3004';
+const PAGE_SIZE = 3;
 
 @Injectable({
   providedIn: 'root'
 })
 export class CoursesService {
-  courses = [
-    {
-      id: 1,
-      title: 'Video Course 1. Name tag',
-      creationDate: Date.now() - 864000000,
-      duration: 88,
-      topRated: false,
-      description: 'Learn about where you can find course descriptions, what information they include, how they ' +
-        'work, and details about various components of a course description. Course descriptions report information ' +
-        'about a university or college\'s classes. They\'re published both in course catalogs that outline degree ' +
-        'requirements and in course schedules that contain descriptions for all courses offered during a particular ' +
-        'semester.'
-    },
-    {
-      id: 2,
-      title: 'Video Course 2. Name tag',
-      creationDate: Date.now() + 864000000,
-      duration: 88,
-      topRated: true,
-      description: 'Learn about where you can find course descriptions, what information they include, how they ' +
-        'work, and details about various components of a course description. Course descriptions report information ' +
-        'about a university or college\'s classes. They\'re published both in course catalogs that outline degree ' +
-        'requirements and in course schedules that contain descriptions for all courses offered during a particular ' +
-        'semester.'
-    },
-    {
-      id: 3,
-      title: 'Video Course 3. Name tag',
-      creationDate: Date.now() - 1728000000,
-      duration: 88,
-      topRated: false,
-      description: 'Learn about where you can find course descriptions, what information they include, how they ' +
-        'work, and details about various components of a course description. Course descriptions report information ' +
-        'about a university or college\'s classes. They\'re published both in course catalogs that outline degree ' +
-        'requirements and in course schedules that contain descriptions for all courses offered during a particular ' +
-        'semester.'
-    }
-  ];
+  courses: CourseModel[];
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
-  getList(): CourseModel[] {
-    return this.courses;
+  public getPage(page = 0): Observable<CourseModel[]> {
+    return this.http.get<CourseModel[]>(BO_URL + '/courses?start=' + page + '&count=' + PAGE_SIZE);
   }
 
   createCourse(data): void {
-    const newItem = {
-      id: this.courses.length + 1,
-      title: data.title,
-      creationDate: data.creationDate,
-      duration: data.duration,
-      topRated: false,
-      description: data.description,
-      authors: data.authors
-    };
-    this.courses.push(newItem);
+    // const newItem = {
+    //   id: this.courses.length + 1,
+    //   title: data.title,
+    //   creationDate: data.creationDate,
+    //   duration: data.duration,
+    //   topRated: false,
+    //   description: data.description,
+    //   authors: data.authors
+    // };
+    // this.courses.push(newItem);
   }
 
-  getItemById(id: number): CourseModel {
-    return this.courses.find(item => item.id === id);
+  getItemById(id: number): Observable<CourseModel> {
+    // return this.courses.find(item => item.id === id);
+    return this.http.get<CourseModel>(BO_URL + '/courses?id=' +  id);
   }
 
   updateItem(id, data): void {
-    this.removeItem(id);
-
-    const updatedItem = {
-      id,
-      title: data.title,
-      creationDate: data.creationDate,
-      duration: data.duration,
-      topRated: false,
-      description: data.description,
-      authors: data.authors
-    };
-    this.courses.push(updatedItem);
+    // this.removeItem(id);
+    //
+    // const updatedItem = {
+    //   id,
+    //   title: data.title,
+    //   creationDate: data.creationDate,
+    //   duration: data.duration,
+    //   topRated: false,
+    //   description: data.description,
+    //   authors: data.authors
+    // };
+    // this.courses.push(updatedItem);
   }
 
   removeItem(id: number): void {

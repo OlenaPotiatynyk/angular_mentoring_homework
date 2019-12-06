@@ -2,8 +2,8 @@
   <div class="left-column">
     <div class="header">
       <h2 class="title">
-        {{item.title | uppercase}}
-        <i *ngIf="item.topRated" class="material-icons star">
+        {{item.name | uppercase}}
+        <i *ngIf="item.isTopRated" class="material-icons star">
           star
         </i>
       </h2>
@@ -12,13 +12,13 @@
           <i class="material-icons">
             access_time
           </i>
-          <span class="duration">{{item.duration | time}}</span>
+          <span class="duration">{{item.lenght | time}}</span>
         </button>
         <button class="button button_s">
           <i class="material-icons">
             calendar_today
           </i>
-          <span class="date">{{item.creationDate | date}}</span>
+          <span class="date">{{item.date | date}}</span>
         </button>
       </div>
     </div>

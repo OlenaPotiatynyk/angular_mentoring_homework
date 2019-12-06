@@ -43,7 +43,8 @@ export class BreadcrumbsComponent implements OnInit {
   }
 
   private resolveNameWhenPathIsId(node, urlSegments): string {
-    const courseId = urlSegments[1] && urlSegments[1].path && Number.parseInt(urlSegments[1].path);
-    return courseId ? this.coursesService.getItemById(courseId).title : node.data['breadcrumb'];
+    const courseId = urlSegments[1] && urlSegments[0].path === 'courses'
+      && urlSegments[1].path && Number.parseInt(urlSegments[1].path);
+    return courseId ? this.coursesService.getItemById(courseId).subscribe(resp => console.log(resp[0])) : node.data['breadcrumb'];
   }
 }

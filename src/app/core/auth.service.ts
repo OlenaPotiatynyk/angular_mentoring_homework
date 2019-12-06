@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +9,7 @@ import { Router } from '@angular/router';
 export class AuthService {
   redirectUrl: string;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private http: HttpClient) { }
 
   login(data): void {
     if (this.isAuthenticated()) {
@@ -38,12 +40,18 @@ export class AuthService {
     return !!localStorage.getItem('user');
   }
 
-  getUserInfo(): string {
-    const user = localStorage.getItem('user');
-    if (user) {
-      return user.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi)[0];
-    } else {
-      return '';
-    }
+  getUserInfo(login = 'flastname', password = 'flastname') {
+    // const user = localStorage.getItem('user');
+    // if (user) {
+    //   return user.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi)[0];
+    // } else {
+    //   return '';
+    // }
+
+    return this.http.get('http://localhost:3004/users?login=' + login);
+  }
+
+  getUsers(): Observable<any[]> {
+    return this.http.get<any[]>('http://localhost:3004/users');
   }
 }

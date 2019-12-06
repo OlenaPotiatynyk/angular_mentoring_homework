@@ -1,4 +1,4 @@
-import {UserInterface} from './shared.interface';
+import { UserInterface } from '../interfaces/user.interface';
 
 export class UserModel implements UserInterface {
   id: number;

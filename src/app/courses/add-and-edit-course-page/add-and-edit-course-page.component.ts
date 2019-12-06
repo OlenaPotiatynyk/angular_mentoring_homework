@@ -9,10 +9,10 @@ import { CoursesService } from '../courses.service';
   styleUrls: ['./add-and-edit-course-page.component.scss']
 })
 export class AddAndEditCoursePageComponent implements OnInit {
-  title = '';
+  name = '';
   description = '';
-  creationDate = '';
-  duration = '';
+  date = '';
+  length = '';
   authors = '';
 
   routeParams: {
@@ -33,25 +33,33 @@ export class AddAndEditCoursePageComponent implements OnInit {
 
   onSubmit(): void {
     const data = {
-      title: this.title,
+      name: this.name,
       description: this.description,
-      creationDate: this.creationDate,
-      duration: this.duration,
+      date: this.date,
+      length: this.length,
       authors: this.authors
     };
 
-    this.routeParams.id ? this.coursesService.updateItem(this.routeParams.id, data) : this.coursesService.createCourse(data);
+    this.routeParams.id
+      ? this.coursesService.updateItem(this.routeParams.id, data)
+      : this.coursesService.createCourse(data);
     this.router.navigate(['courses']);
   }
 
   private fillFieldsToEdit(): void {
-    const editItem = this.coursesService.getItemById(this.routeParams.id);
-
-    if (editItem) {
-      this.title = editItem.title;
-      this.description = editItem.description;
-      this.creationDate = editItem.creationDate.toString();
-      this.duration = editItem.duration.toString();
-    }
+    let editItem;
+    this.coursesService.getItemById(this.routeParams.id)
+      .subscribe(resp => {
+        editItem = resp[0];
+        if (editItem) {
+          this.name = editItem.name;
+          this.description = editItem.description;
+          this.date = editItem.date;
+          this.length = editItem.length;
+          this.authors = editItem.authors && editItem.authors.length > 0
+            ? editItem.authors.map(author => author.name + ' ' + author.lastName).join(', ')
+            : '';
+        }
+      });
   }
 }

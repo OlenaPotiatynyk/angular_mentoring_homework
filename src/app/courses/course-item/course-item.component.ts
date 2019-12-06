@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
-import { CourseInterface } from '../../shared/shared.interface';
+import { CourseInterface } from '../../shared/interfaces/course.interface';
 
 @Component({
   selector: 'app-course-item',

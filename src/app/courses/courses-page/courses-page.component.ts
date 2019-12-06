@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { UserModel } from '../../shared/user.model';
-import { CourseModel } from '../../shared/course.model';
+import { UserModel } from '../../shared/models/user.model';
+import { CourseModel } from '../../shared/models/course.model';
 import { FilterPipe } from '../../shared/pipes/filter.pipe';
 import { CoursesService } from '../courses.service';
 
@@ -14,17 +14,20 @@ import { CoursesService } from '../courses.service';
 export class CoursesPageComponent implements OnInit {
   public courses: CourseModel[] = [];
   public value = '';
+  public page = 0;
+  public lastPage = false;
 
   private users: UserModel[];
 
   constructor(private filter: FilterPipe, private coursesService: CoursesService, private router: Router) { }
 
   ngOnInit(): void {
-    this.courses = this.coursesService.getList();
+    this.coursesService.getPage(this.page)
+      .subscribe(resp => this.courses = resp);
   }
 
   search(): void {
-    this.courses = this.filter.transform(this.coursesService.getList(), this.value);
+    // this.courses = this.filter.transform(this.coursesService.getList().subscribe(), this.value);
   }
 
   addCourse(): void {
@@ -32,14 +35,20 @@ export class CoursesPageComponent implements OnInit {
   }
 
   loadMoreHandler(): void {
-    console.log('%cYou just clicked LOAD MORE button. Well done!', 'color: chocolate;');
+    this.page += 3;
+    this.coursesService.getPage(this.page)
+      .subscribe(resp => {
+        resp.length > 0
+          ? this.courses = this.courses.concat(resp)
+          : this.lastPage = true;
+      });
   }
 
   onDeleteItem(id: number): void {
     const isConfirmed = confirm('Do you really want to delete this course?');
     if (isConfirmed) {
       this.coursesService.removeItem(id);
-      this.courses = this.coursesService.getList();
+      // this.courses = this.coursesService.getList();
     }
   }
 
