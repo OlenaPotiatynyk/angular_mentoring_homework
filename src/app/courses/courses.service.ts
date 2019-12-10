@@ -15,8 +15,8 @@ export class CoursesService {
   constructor(private http: HttpClient) {
   }
 
-  public getPage(page = 0): Observable<CourseModel[]> {
-    return this.http.get<CourseModel[]>(BO_URL + '/courses?sort=date&start=' + page + '&count=' + PAGE_SIZE);
+  public getPage(start = 0, count = PAGE_SIZE): Observable<CourseModel[]> {
+    return this.http.get<CourseModel[]>(BO_URL + '/courses?sort=date&start=' + start + '&count=' + count);
   }
 
   public getCoursesBySearch(textFragment): Observable<CourseModel[]> {

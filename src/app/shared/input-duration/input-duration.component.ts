@@ -8,6 +8,4 @@ import { Component, Input } from '@angular/core';
 export class InputDurationComponent {
   @Input() duration;
 
-  constructor() { }
-
 }

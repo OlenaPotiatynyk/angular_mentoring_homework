@@ -15,7 +15,7 @@ const ITEMS_ON_PAGE = 3;
 export class CoursesPageComponent implements OnInit {
   public courses: CourseModel[] = [];
   public value = '';
-  public page = 0;
+  public startItem = 0;
   public lastPage = false;
   public storedCourses = null;
 
@@ -23,7 +23,7 @@ export class CoursesPageComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.coursesService.getPage(this.page)
+    this.coursesService.getPage(this.startItem)
       .subscribe(resp => this.courses = resp);
   }
 
@@ -49,8 +49,8 @@ export class CoursesPageComponent implements OnInit {
   }
 
   public loadMoreHandler(): void {
-    this.page += ITEMS_ON_PAGE;
-    this.coursesService.getPage(this.page)
+    this.startItem += ITEMS_ON_PAGE;
+    this.coursesService.getPage(this.startItem)
       .subscribe(resp => {
         resp.length > 0
           ? this.courses = this.courses.concat(resp)
@@ -61,14 +61,16 @@ export class CoursesPageComponent implements OnInit {
   public onDeleteItem(id: number): void {
     const isConfirmed = confirm('Do you really want to delete this course?');
     if (isConfirmed) {
-      this.coursesService.removeItem(id).subscribe(() => {
-        this.courses = this.courses.filter(item => item.id !== id);
-        this.page -= 1;
-      });
+      this.coursesService.removeItem(id).subscribe(() => this.recallCoursesList());
     }
   }
 
   public onEditItem(id: number): void {
     this.router.navigate(['courses/', id]);
+  }
+
+  private recallCoursesList(): void {
+    this.coursesService.getPage(0, this.startItem + 2)
+      .subscribe(resp => this.courses = resp);
   }
 }

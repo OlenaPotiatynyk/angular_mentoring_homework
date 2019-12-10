@@ -12,13 +12,11 @@ export class CourseItemComponent {
   @Output() editItem = new EventEmitter();
   @Output() deleteItem = new EventEmitter();
 
-  constructor() { }
-
-  edit(): void {
+  public edit(): void {
     this.editItem.emit();
   }
 
-  delete(): void {
+  public delete(): void {
     this.deleteItem.emit();
   }
 

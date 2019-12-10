@@ -8,9 +8,7 @@ import { Component, Input, OnChanges } from '@angular/core';
 export class InputDateComponent implements OnChanges {
   @Input() creationDate: string;
 
-  constructor() { }
-
-  ngOnChanges() {
+  public ngOnChanges() {
     this.formatDate();
   }
 
