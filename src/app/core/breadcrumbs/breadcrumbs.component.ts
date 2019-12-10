@@ -15,7 +15,7 @@ export class BreadcrumbsComponent implements OnInit {
 
   constructor(private router: Router, private coursesService: CoursesService) { }
 
-  ngOnInit() {
+  public ngOnInit() {
     this.router.events.subscribe(event => {
       this.breadcrumbs = [];
       this.parseRoute(this.router.routerState.snapshot.root);
@@ -23,7 +23,7 @@ export class BreadcrumbsComponent implements OnInit {
   }
 
   private parseRoute(node: ActivatedRouteSnapshot) {
-    if (node.data['breadcrumb']) {
+    if (node.data.breadcrumb) {
       let urlSegments: UrlSegment[] = [];
       node.pathFromRoot.forEach(routerState => {
         urlSegments = urlSegments.concat(routerState.url);
@@ -44,7 +44,12 @@ export class BreadcrumbsComponent implements OnInit {
 
   private resolveNameWhenPathIsId(node, urlSegments): string {
     const courseId = urlSegments[1] && urlSegments[0].path === 'courses'
-      && urlSegments[1].path && Number.parseInt(urlSegments[1].path);
-    return courseId ? this.coursesService.getItemById(courseId).subscribe(resp => console.log(resp[0])) : node.data['breadcrumb'];
+      && urlSegments[1].path && +urlSegments[1].path;
+
+    if (courseId) {
+      this.coursesService.getItemById(courseId).subscribe(resp => resp[0].name);
+    } else {
+      return node.data.breadcrumb;
+    }
   }
 }

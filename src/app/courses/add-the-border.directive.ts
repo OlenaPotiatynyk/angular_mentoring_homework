@@ -4,19 +4,21 @@ import { Directive, ElementRef, Input, OnInit } from '@angular/core';
   selector: '[appAddTheBorder]'
 })
 export class AddTheBorderDirective implements OnInit {
-  @Input('appAddTheBorder') creationDate: number;
+  @Input('appAddTheBorder') creationDate: string;
 
   private currentDate: number = Date.now();
   private freshCoursePeriod = 1209600000;
 
   constructor(private el: ElementRef) { }
 
-  ngOnInit() {
-    if (this.creationDate < this.currentDate && this.creationDate >= this.currentDate - this.freshCoursePeriod) {
+  public ngOnInit(): void {
+    const date = new Date(this.creationDate).getTime();
+
+    if (date < this.currentDate && date >= this.currentDate - this.freshCoursePeriod) {
       this.el.nativeElement.style.border = '2px solid #9bc837';
     }
 
-    if (this.creationDate > this.currentDate) {
+    if (date > this.currentDate) {
       this.el.nativeElement.style.border = '2px solid #30b6dd';
     }
   }

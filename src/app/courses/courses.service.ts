@@ -15,25 +15,15 @@ export class CoursesService {
   constructor(private http: HttpClient) { }
 
   public getPage(page = 0): Observable<CourseModel[]> {
-    return this.http.get<CourseModel[]>(BO_URL + '/courses?start=' + page + '&count=' + PAGE_SIZE);
+    return this.http.get<CourseModel[]>(BO_URL + '/courses?sort=date&start=' + page + '&count=' + PAGE_SIZE);
   }
 
-  createCourse(data): void {
-    // const newItem = {
-    //   id: this.courses.length + 1,
-    //   title: data.title,
-    //   creationDate: data.creationDate,
-    //   duration: data.duration,
-    //   topRated: false,
-    //   description: data.description,
-    //   authors: data.authors
-    // };
-    // this.courses.push(newItem);
+  public createCourse(data): Observable<CourseModel> {
+    return this.http.post<CourseModel>(BO_URL + '/courses', data);
   }
 
-  getItemById(id: number): Observable<CourseModel> {
-    // return this.courses.find(item => item.id === id);
-    return this.http.get<CourseModel>(BO_URL + '/courses?id=' +  id);
+  public getItemById(id: number): Observable<CourseModel> {
+    return this.http.get<CourseModel>(BO_URL + '/courses/' + id);
   }
 
   updateItem(id, data): void {
@@ -49,9 +39,11 @@ export class CoursesService {
     //   authors: data.authors
     // };
     // this.courses.push(updatedItem);
+
+    // return this.http.patch<CourseModel>(BO_URL + '/courses?id=' + id);
   }
 
-  removeItem(id: number): void {
-    this.courses = this.courses.filter(item => item.id !== id);
+  public removeItem(id: number): Observable<{}> {
+    return this.http.delete<{}>(BO_URL + '/courses/' + id);
   }
 }

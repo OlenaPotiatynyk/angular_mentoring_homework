@@ -4,9 +4,9 @@ import { AuthorModel } from './author.model';
 export class CourseModel implements CourseInterface {
   id: number;
   name: string;
-  date: number;
+  date: string;
   length: number;
   isTopRated: boolean;
   description: string;
-  authors: AuthorModel;
+  authors: AuthorModel[];
 }

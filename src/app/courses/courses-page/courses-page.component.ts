@@ -6,6 +6,8 @@ import { CourseModel } from '../../shared/models/course.model';
 import { FilterPipe } from '../../shared/pipes/filter.pipe';
 import { CoursesService } from '../courses.service';
 
+const ITEMS_ON_PAGE = 3;
+
 @Component({
   selector: 'app-courses-page',
   templateUrl: './courses-page.component.html',
@@ -21,7 +23,7 @@ export class CoursesPageComponent implements OnInit {
 
   constructor(private filter: FilterPipe, private coursesService: CoursesService, private router: Router) { }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
     this.coursesService.getPage(this.page)
       .subscribe(resp => this.courses = resp);
   }
@@ -30,12 +32,12 @@ export class CoursesPageComponent implements OnInit {
     // this.courses = this.filter.transform(this.coursesService.getList().subscribe(), this.value);
   }
 
-  addCourse(): void {
+  public addCourse(): void {
     this.router.navigate(['courses/new']);
   }
 
-  loadMoreHandler(): void {
-    this.page += 3;
+  public loadMoreHandler(): void {
+    this.page += ITEMS_ON_PAGE;
     this.coursesService.getPage(this.page)
       .subscribe(resp => {
         resp.length > 0
@@ -44,15 +46,17 @@ export class CoursesPageComponent implements OnInit {
       });
   }
 
-  onDeleteItem(id: number): void {
+  public onDeleteItem(id: number): void {
     const isConfirmed = confirm('Do you really want to delete this course?');
     if (isConfirmed) {
-      this.coursesService.removeItem(id);
-      // this.courses = this.coursesService.getList();
+      this.coursesService.removeItem(id).subscribe(() => {
+        this.courses = this.courses.filter(item => item.id !== id);
+        this.page -= 1;
+      });
     }
   }
 
-  onEditItem(id: number): void {
+  public onEditItem(id: number): void {
     this.router.navigate(['courses/', id]);
   }
 }

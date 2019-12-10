@@ -1,21 +1,21 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 
 @Component({
   selector: 'app-input-date',
   templateUrl: './input-date.component.html',
   styleUrls: ['./input-date.component.scss']
 })
-export class InputDateComponent implements OnInit {
+export class InputDateComponent implements OnChanges {
   @Input() creationDate: string;
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnChanges() {
     this.formatDate();
   }
 
   private formatDate(): void {
-    this.creationDate = new Date(Number.parseInt(this.creationDate)).toISOString().split('T')[0];
+    this.creationDate = this.creationDate.split('T')[0];
   }
 
 }

@@ -12,7 +12,7 @@ export class AddAndEditCoursePageComponent implements OnInit {
   name = '';
   description = '';
   date = '';
-  length = '';
+  length = null;
   authors = '';
 
   routeParams: {
@@ -21,9 +21,9 @@ export class AddAndEditCoursePageComponent implements OnInit {
 
   constructor(private coursesService: CoursesService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
-  ngOnInit() {
+  public ngOnInit() {
     this.activatedRoute.params.subscribe((routeParams) => {
-      this.routeParams.id = Number.parseInt(routeParams.id);
+      this.routeParams.id = +routeParams.id;
     });
 
     if (this.routeParams.id) {
@@ -31,33 +31,31 @@ export class AddAndEditCoursePageComponent implements OnInit {
     }
   }
 
-  onSubmit(): void {
+  public onSubmit(): void {
     const data = {
       name: this.name,
       description: this.description,
       date: this.date,
       length: this.length,
-      authors: this.authors
+      authors: this.authors,
+      isTopRated: false
     };
 
     this.routeParams.id
       ? this.coursesService.updateItem(this.routeParams.id, data)
-      : this.coursesService.createCourse(data);
-    this.router.navigate(['courses']);
+      : this.coursesService.createCourse(data).subscribe(() => this.router.navigate(['courses']));
   }
 
   private fillFieldsToEdit(): void {
-    let editItem;
     this.coursesService.getItemById(this.routeParams.id)
       .subscribe(resp => {
-        editItem = resp[0];
-        if (editItem) {
-          this.name = editItem.name;
-          this.description = editItem.description;
-          this.date = editItem.date;
-          this.length = editItem.length;
-          this.authors = editItem.authors && editItem.authors.length > 0
-            ? editItem.authors.map(author => author.name + ' ' + author.lastName).join(', ')
+        if (resp.length > 0) {
+          this.name = resp.name;
+          this.description = resp.description;
+          this.date = resp.date;
+          this.length = resp.length;
+          this.authors = resp.authors && resp.authors.length > 0
+            ? resp.authors.map(author => author.name + ' ' + author.lastName).join(', ')
             : '';
         }
       });
