@@ -28,16 +28,14 @@ export class CoursesPageComponent implements OnInit {
   }
 
   public search(): void {
-    if (this.value.length > 2) {
+    if (this.value.length > 0) {
       this.coursesService.getCoursesBySearch(this.value)
         .subscribe(resp => {
           this.storedCourses = this.courses;
           this.courses = resp;
           this.lastPage = true;
         });
-    }
-
-    if (this.value.length === 0 && this.storedCourses) {
+    } else if (this.value.length === 0 && this.storedCourses) {
       this.courses = this.storedCourses;
       this.storedCourses = null;
       this.lastPage = false;

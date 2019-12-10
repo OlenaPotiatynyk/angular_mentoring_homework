@@ -10,7 +10,6 @@ const PAGE_SIZE = 3;
   providedIn: 'root'
 })
 export class CoursesService {
-  courses: CourseModel[];
 
   constructor(private http: HttpClient) {
   }
