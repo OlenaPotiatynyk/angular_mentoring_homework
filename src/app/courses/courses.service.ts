@@ -12,10 +12,15 @@ const PAGE_SIZE = 3;
 export class CoursesService {
   courses: CourseModel[];
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   public getPage(page = 0): Observable<CourseModel[]> {
     return this.http.get<CourseModel[]>(BO_URL + '/courses?sort=date&start=' + page + '&count=' + PAGE_SIZE);
+  }
+
+  public getCoursesBySearch(textFragment): Observable<CourseModel[]> {
+    return this.http.get<CourseModel[]>(BO_URL + '/courses?textFragment=' + textFragment);
   }
 
   public createCourse(data): Observable<CourseModel> {

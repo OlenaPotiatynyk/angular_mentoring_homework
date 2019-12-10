@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { UserModel } from '../../shared/models/user.model';
 import { CourseModel } from '../../shared/models/course.model';
 import { FilterPipe } from '../../shared/pipes/filter.pipe';
 import { CoursesService } from '../courses.service';
@@ -18,18 +17,31 @@ export class CoursesPageComponent implements OnInit {
   public value = '';
   public page = 0;
   public lastPage = false;
+  public storedCourses = null;
 
-  private users: UserModel[];
-
-  constructor(private filter: FilterPipe, private coursesService: CoursesService, private router: Router) { }
+  constructor(private filter: FilterPipe, private coursesService: CoursesService, private router: Router) {
+  }
 
   public ngOnInit(): void {
     this.coursesService.getPage(this.page)
       .subscribe(resp => this.courses = resp);
   }
 
-  search(): void {
-    // this.courses = this.filter.transform(this.coursesService.getList().subscribe(), this.value);
+  public search(): void {
+    if (this.value.length > 2) {
+      this.coursesService.getCoursesBySearch(this.value)
+        .subscribe(resp => {
+          this.storedCourses = this.courses;
+          this.courses = resp;
+          this.lastPage = true;
+        });
+    }
+
+    if (this.value.length === 0 && this.storedCourses) {
+      this.courses = this.storedCourses;
+      this.storedCourses = null;
+      this.lastPage = false;
+    }
   }
 
   public addCourse(): void {
