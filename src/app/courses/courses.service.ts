@@ -26,21 +26,8 @@ export class CoursesService {
     return this.http.get<CourseModel>(BO_URL + '/courses/' + id);
   }
 
-  updateItem(id, data): void {
-    // this.removeItem(id);
-    //
-    // const updatedItem = {
-    //   id,
-    //   title: data.title,
-    //   creationDate: data.creationDate,
-    //   duration: data.duration,
-    //   topRated: false,
-    //   description: data.description,
-    //   authors: data.authors
-    // };
-    // this.courses.push(updatedItem);
-
-    // return this.http.patch<CourseModel>(BO_URL + '/courses?id=' + id);
+  public updateItem(id: number, data): Observable<CourseModel> {
+    return this.http.patch<CourseModel>(BO_URL + '/courses/' + id, data);
   }
 
   public removeItem(id: number): Observable<{}> {

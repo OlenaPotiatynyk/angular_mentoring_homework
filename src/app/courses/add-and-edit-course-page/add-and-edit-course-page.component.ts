@@ -43,7 +43,9 @@ export class AddAndEditCoursePageComponent implements OnInit {
 
     this.routeParams.id
       ? this.coursesService.updateItem(this.routeParams.id, data)
-      : this.coursesService.createCourse(data).subscribe(() => this.router.navigate(['courses']));
+        .subscribe(() => this.returnToCoursesPage())
+      : this.coursesService.createCourse(data)
+        .subscribe(() => this.returnToCoursesPage());
   }
 
   private fillFieldsToEdit(): void {
@@ -59,5 +61,9 @@ export class AddAndEditCoursePageComponent implements OnInit {
             : '';
         }
       });
+  }
+
+  private returnToCoursesPage(): void {
+    this.router.navigate(['courses']);
   }
 }
