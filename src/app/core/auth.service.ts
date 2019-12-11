@@ -11,47 +11,30 @@ export class AuthService {
 
   constructor(private router: Router, private http: HttpClient) { }
 
-  login(data): void {
-    if (this.isAuthenticated()) {
-      return;
-    }
-
-    const userData = {
-      email: data.email,
-      password: data.password,
-      token: Math.random()
-    };
-    localStorage.setItem('user', JSON.stringify(userData));
-    console.log('log in successfully');
-    this.router.navigate(['courses']);
+  public login(data): void {
+    this.getToken(data)
+      .subscribe(
+        resp => {
+          localStorage.setItem('token', JSON.stringify(resp.token));
+          console.log('log in successfully');
+          this.router.navigate(['courses']);
+        },
+        error => alert(`${error.error}. Please use LOGIN: flastname, PASSWORD: flastname`)
+      );
   }
 
-  logout(): void {
-    if (!this.isAuthenticated()) {
-      return;
-    }
-
-    localStorage.removeItem('user');
+  public logout(): void {
+    localStorage.removeItem('token');
     console.log('log out successfully');
     this.router.navigate(['login']);
   }
 
-  isAuthenticated(): boolean {
-    return !!localStorage.getItem('user');
+  public isAuthenticated(): boolean {
+    return !!localStorage.getItem('token');
   }
 
-  getUserInfo(login = 'flastname', password = 'flastname') {
-    // const user = localStorage.getItem('user');
-    // if (user) {
-    //   return user.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi)[0];
-    // } else {
-    //   return '';
-    // }
-
-    return this.http.get('http://localhost:3004/users?login=' + login);
+  private getToken(data): Observable<any> {
+    return this.http.post('http://localhost:3004/auth/login', data);
   }
 
-  getUsers(): Observable<any[]> {
-    return this.http.get<any[]>('http://localhost:3004/users');
-  }
 }

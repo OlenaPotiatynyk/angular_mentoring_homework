@@ -3,7 +3,7 @@
   <div class="input-group">
     <label>
       <span>E-mail:</span>
-      <input type="email" formControlName="email" placeholder="example@mail.com" required>
+      <input type="email" formControlName="login" placeholder="example@mail.com" required>
     </label>
   </div>
   <div class="input-group">
@@ -13,7 +13,7 @@
     </label>
   </div>
   <div class="footer">
-    <button (click)="getUserInfo()">Forgot password?</button>
+    <a href="#">Forgot password?</a>
     <button type="submit" class="button button_m button_ok" [disabled]="!loginForm.valid">Login</button>
   </div>
 </form>
