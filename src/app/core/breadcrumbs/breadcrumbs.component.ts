@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRouteSnapshot, Router, UrlSegment } from '@angular/router';
+import { ActivatedRouteSnapshot, NavigationEnd, Router, UrlSegment } from '@angular/router';
 import { CoursesService } from '../../courses/courses.service';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-breadcrumbs',
@@ -13,16 +14,27 @@ export class BreadcrumbsComponent implements OnInit {
     url: string
   }[] = [];
 
+  courseTitle: string;
+
   constructor(private router: Router, private coursesService: CoursesService) { }
 
   public ngOnInit() {
-    this.router.events.subscribe(event => {
-      this.breadcrumbs = [];
-      this.parseRoute(this.router.routerState.snapshot.root);
-    });
+    this.router.events.pipe(filter((e): e is NavigationEnd => e instanceof NavigationEnd))
+      .subscribe(event => {
+        this.breadcrumbs = [];
+        const courseId = +event.url.split('/')[2];
+        if (courseId) {
+          this.coursesService.getItemById(courseId).subscribe(resp => {
+            this.breadcrumbs = [];
+            this.parseRoute(this.router.routerState.snapshot.root, resp.name);
+          });
+        } else {
+          this.parseRoute(this.router.routerState.snapshot.root);
+        }
+      });
   }
 
-  private parseRoute(node: ActivatedRouteSnapshot) {
+  private parseRoute(node: ActivatedRouteSnapshot, courseName = null) {
     if (node.data.breadcrumb) {
       let urlSegments: UrlSegment[] = [];
       node.pathFromRoot.forEach(routerState => {
@@ -33,23 +45,13 @@ export class BreadcrumbsComponent implements OnInit {
         return urlSegment.path;
       }).join('/');
       this.breadcrumbs.push({
-        name: this.resolveNameWhenPathIsId(node, urlSegments),
+        name: node.data.breadcrumb === 'ID' ? courseName : node.data.breadcrumb,
         url: '/' + url
       });
     }
+
     if (node.firstChild) {
-      this.parseRoute(node.firstChild);
-    }
-  }
-
-  private resolveNameWhenPathIsId(node, urlSegments): string {
-    const courseId = urlSegments[1] && urlSegments[0].path === 'courses'
-      && urlSegments[1].path && +urlSegments[1].path;
-
-    if (courseId) {
-      this.coursesService.getItemById(courseId).subscribe(resp => resp[0].name);
-    } else {
-      return node.data.breadcrumb;
+      this.parseRoute(node.firstChild, courseName);
     }
   }
 }

@@ -1,9 +1,10 @@
 <div class="breadcrumbs-wrapper">
   <span class="breadcrumbs" *ngFor="let breadcrumb of breadcrumbs; let i = index;">
                         <a [hidden]="i == (breadcrumbs.length - 1)"
-                           [routerLink]="[breadcrumb.url]">{{breadcrumb.name}}</a>
+                           [routerLink]="[breadcrumb.url]">{{breadcrumb.name }}</a>
                         <span [hidden]="i == (breadcrumbs.length - 1)"
                               style="color: #777; padding-left: 5px; padding-right: 5px;">/</span>
-                        <span [hidden]="i != (breadcrumbs.length - 1)" style="color: #777">{{breadcrumb.name}}</span>
+                        <span [hidden]="i != (breadcrumbs.length - 1)"
+                              style="color: #777">{{ breadcrumb.name | titlecase }}</span>
                     </span>
 </div>

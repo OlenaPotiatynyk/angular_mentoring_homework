@@ -2,7 +2,7 @@
   <h2 *ngIf="!routeParams.id">New course</h2>
   <div class="input-group input-group_full-size">
     <label for="title">Title:<span>*required</span></label>
-    <input id="title" [(ngModel)]="name" placeholder="Text input" required>
+    <input id="title" [ngModel]="name | titlecase" (ngModelChange)="name=$event" placeholder="Text input" required>
   </div>
 
   <div class="input-group input-group_full-size">

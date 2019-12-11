@@ -14,7 +14,7 @@ const routes: Routes = [
     children: [
       {path: '', component: CoursesPageComponent, data: { breadcrumb: null }},
       {path: 'new', component: AddAndEditCoursePageComponent, data: { breadcrumb: 'New' }},
-      {path: ':id', component: AddAndEditCoursePageComponent, data: { breadcrumb: 'Name' }}
+      {path: ':id', component: AddAndEditCoursePageComponent, data: { breadcrumb: 'ID' }}
     ]
   },
   {

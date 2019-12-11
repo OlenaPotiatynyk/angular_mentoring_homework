@@ -1,9 +1,10 @@
-import { Component, Input, OnChanges } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnChanges } from '@angular/core';
 
 @Component({
   selector: 'app-input-date',
   templateUrl: './input-date.component.html',
-  styleUrls: ['./input-date.component.scss']
+  styleUrls: ['./input-date.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class InputDateComponent implements OnChanges {
   @Input() creationDate: string;
