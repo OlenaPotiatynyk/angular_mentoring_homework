@@ -15,11 +15,11 @@ export class AddTheBorderDirective implements OnInit {
     const date = new Date(this.creationDate).getTime();
 
     if (date < this.currentDate && date >= this.currentDate - this.freshCoursePeriod) {
-      this.el.nativeElement.style.border = '2px solid #9bc837';
+      this.el.nativeElement.className = this.el.nativeElement.className.concat(' fresh-course');
     }
 
     if (date > this.currentDate) {
-      this.el.nativeElement.style.border = '2px solid #30b6dd';
+      this.el.nativeElement.className = this.el.nativeElement.className.concat(' upcoming-course');
     }
   }
 }
