@@ -14,8 +14,6 @@ export class BreadcrumbsComponent implements OnInit {
     url: string
   }[] = [];
 
-  courseTitle: string;
-
   constructor(private router: Router, private coursesService: CoursesService) { }
 
   public ngOnInit() {
