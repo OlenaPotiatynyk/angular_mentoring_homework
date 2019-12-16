@@ -1,9 +1,8 @@
 <div class="search">
   <div class="search__input">
     <i class="search__input-icon material-icons">search</i>
-    <input [(ngModel)]="value" class="search__input-field" placeholder="Text to search" (keyup.enter)="search()">
+    <input [(ngModel)]="value" class="search__input-field" placeholder="Text to search" (keyup)="onInput()">
   </div>
-  <button class="search__button button button_l button_ok" (click)="search()">Search</button>
 </div>
 
 <div class="menu">

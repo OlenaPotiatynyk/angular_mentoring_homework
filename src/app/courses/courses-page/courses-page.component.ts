@@ -17,7 +17,6 @@ export class CoursesPageComponent implements OnInit {
   public value = '';
   public startItem = 0;
   public lastPage = false;
-  public storedCourses = null;
 
   constructor(private filter: FilterPipe, private coursesService: CoursesService, private router: Router) {
   }
@@ -28,16 +27,14 @@ export class CoursesPageComponent implements OnInit {
   }
 
   public search(): void {
-    if (this.value.length > 0) {
+    if (this.value.length > 2) {
       this.coursesService.getCoursesBySearch(this.value)
         .subscribe(resp => {
-          this.storedCourses = this.courses;
           this.courses = resp;
           this.lastPage = true;
         });
-    } else if (this.value.length === 0 && this.storedCourses) {
-      this.courses = this.storedCourses;
-      this.storedCourses = null;
+    } else if (this.value.length === 0) {
+      this.recallCoursesList();
       this.lastPage = false;
     }
   }
@@ -59,7 +56,7 @@ export class CoursesPageComponent implements OnInit {
   public onDeleteItem(id: number): void {
     const isConfirmed = confirm('Do you really want to delete this course?');
     if (isConfirmed) {
-      this.coursesService.removeItem(id).subscribe(() => this.recallCoursesList());
+      this.coursesService.removeItem(id).subscribe(() => this.recallCoursesList(ITEMS_ON_PAGE - 1));
     }
   }
 
@@ -67,8 +64,8 @@ export class CoursesPageComponent implements OnInit {
     this.router.navigate(['courses/', id]);
   }
 
-  private recallCoursesList(): void {
-    this.coursesService.getPage(0, this.startItem + 2)
+  private recallCoursesList(addItems = ITEMS_ON_PAGE): void {
+    this.coursesService.getPage(0, this.startItem + addItems)
       .subscribe(resp => this.courses = resp);
   }
 }
