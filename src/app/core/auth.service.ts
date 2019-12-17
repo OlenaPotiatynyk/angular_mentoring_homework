@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { LoginInterface } from '../shared/interfaces/login.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class AuthService {
 
   constructor(private router: Router, private http: HttpClient) { }
 
-  public login(data): void {
+  public login(data: LoginInterface): void {
     this.getToken(data)
       .subscribe(
         resp => {
@@ -33,7 +34,7 @@ export class AuthService {
     return !!localStorage.getItem('token');
   }
 
-  private getToken(data): Observable<any> {
+  private getToken(data: LoginInterface): Observable<any> {
     return this.http.post('http://localhost:3004/auth/login', data);
   }
 
