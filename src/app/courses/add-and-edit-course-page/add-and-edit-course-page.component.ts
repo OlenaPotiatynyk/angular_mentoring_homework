@@ -37,7 +37,14 @@ export class AddAndEditCoursePageComponent implements OnInit {
       description: this.description,
       date: this.date,
       length: this.length,
-      authors: this.authors,
+      authors: this.authors.split(',').map((fullName, index) => {
+        const author = fullName.trim().split(' ');
+        return {
+          id: index + 1,
+          name: author[0],
+          lastName: author[1]
+        };
+      }),
       isTopRated: false
     };
 

@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+
 import { Observable } from 'rxjs';
+
 import { LoginInterface } from '../shared/interfaces/login.interface';
 
 @Injectable({
@@ -34,8 +36,8 @@ export class AuthService {
     return !!localStorage.getItem('token');
   }
 
-  private getToken(data: LoginInterface): Observable<any> {
-    return this.http.post('http://localhost:3004/auth/login', data);
+  private getToken(data: LoginInterface): Observable<{token: string}> {
+    return this.http.post<{token: string}>('http://localhost:3004/auth/login', data);
   }
 
 }
