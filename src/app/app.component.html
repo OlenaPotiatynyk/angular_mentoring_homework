@@ -1,6 +1,7 @@
 <app-header></app-header>
 
 <app-breadcrumbs [hidden]="!userIsAuthorised()"></app-breadcrumbs>
+<app-load-spinner [hidden]="!isLoadingData()"></app-load-spinner>
 
 <div class="content-wrapper">
   <router-outlet></router-outlet>
