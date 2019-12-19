@@ -6,6 +6,7 @@ import { Observable, Subject } from 'rxjs';
 
 import { LoginInterface } from '../shared/interfaces/login.interface';
 import { UserModel } from '../shared/models/user.model';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +14,9 @@ import { UserModel } from '../shared/models/user.model';
 export class AuthService {
   redirectUrl: string;
   authorizedUser = new Subject<any>();
+
+  private baseUrl = environment.baseUrl;
+  private AUTH_URL = this.baseUrl + '/auth';
 
   constructor(private router: Router, private http: HttpClient) {
   }
@@ -33,7 +37,7 @@ export class AuthService {
 
   public getUserInfo(): Observable<UserModel> {
     const token = localStorage.getItem('token');
-    return this.http.post<UserModel>('http://localhost:3004/auth/userinfo', {token});
+    return this.http.post<UserModel>(this.AUTH_URL + '/userinfo', {token});
   }
 
   public logout(): void {
@@ -47,7 +51,7 @@ export class AuthService {
   }
 
   private getToken(data: LoginInterface): Observable<{ token: string }> {
-    return this.http.post<{ token: string }>('http://localhost:3004/auth/login', data);
+    return this.http.post<{ token: string }>(this.AUTH_URL + '/login', data);
   }
 
 }

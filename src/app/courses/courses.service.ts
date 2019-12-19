@@ -4,20 +4,23 @@ import { HttpClient } from '@angular/common/http';
 import { CourseModel } from '../shared/models/course.model';
 
 import { Observable } from 'rxjs';
+import { environment } from '../../environments/environment';
 
-const BO_URL = 'http://localhost:3004';
 const PAGE_SIZE = 3;
 
 @Injectable({
   providedIn: 'root'
 })
 export class CoursesService {
+  private baseUrl = environment.baseUrl;
+  private COURSES_URL = this.baseUrl + '/courses';
 
   constructor(private http: HttpClient) {
   }
 
   public getPage(start = 0, count = PAGE_SIZE): Observable<CourseModel[]> {
-    return this.http.get<CourseModel[]>(BO_URL + '/courses?sort=date&start=' + start + '&count=' + count);
+    const url = this.COURSES_URL + '?sort=date&start=' + start + '&count=' + count;
+    return this.http.get<CourseModel[]>(url);
   }
 
   public searchHandler(textFragment: string, count: number): Observable<CourseModel[]> {
@@ -29,22 +32,22 @@ export class CoursesService {
   }
 
   public createCourse(data: CourseModel): Observable<CourseModel> {
-    return this.http.post<CourseModel>(BO_URL + '/courses', data);
+    return this.http.post<CourseModel>(this.COURSES_URL, data);
   }
 
   public getItemById(id: number): Observable<CourseModel> {
-    return this.http.get<CourseModel>(BO_URL + '/courses/' + id);
+    return this.http.get<CourseModel>(this.COURSES_URL + id);
   }
 
   public updateItem(id: number, data: CourseModel): Observable<CourseModel> {
-    return this.http.patch<CourseModel>(BO_URL + '/courses/' + id, data);
+    return this.http.patch<CourseModel>(this.COURSES_URL + id, data);
   }
 
   public removeItem(id: number): Observable<{}> {
-    return this.http.delete<{}>(BO_URL + '/courses/' + id);
+    return this.http.delete<{}>(this.COURSES_URL + id);
   }
 
   private getCoursesBySearch(textFragment: string): Observable<CourseModel[]> {
-    return this.http.get<CourseModel[]>(BO_URL + '/courses?textFragment=' + textFragment);
+    return this.http.get<CourseModel[]>(this.COURSES_URL + '?textFragment=' + textFragment);
   }
 }
