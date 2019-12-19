@@ -19,6 +19,8 @@ export class CoursesPageComponent implements OnInit {
   public value = '';
   public startItem = 0;
   public showLoadMore = true;
+
+  private lastPage = false;
   private searchTerms = new Subject<string>();
 
   constructor(private coursesService: CoursesService, private router: Router) {
@@ -35,7 +37,7 @@ export class CoursesPageComponent implements OnInit {
     )
       .subscribe(resp => {
         this.courses = resp;
-        this.showLoadMore = this.showLoadMore && !!this.value.length;
+        this.showLoadMore = !this.lastPage && !this.value.length;
       });
   }
 
@@ -53,7 +55,7 @@ export class CoursesPageComponent implements OnInit {
       .subscribe(resp => {
         resp.length > 0
           ? this.courses = this.courses.concat(resp)
-          : this.showLoadMore = false;
+          : this.lastPage = true;
       });
   }
 

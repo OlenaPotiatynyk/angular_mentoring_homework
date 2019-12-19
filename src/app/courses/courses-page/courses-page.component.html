@@ -25,6 +25,6 @@
   </app-course-item>
 </div>
 
-<div class="container" *ngIf="showLoadMore">
+<div class="container" *ngIf="showLoadMore && !lastPage">
   <button (click)="loadMoreHandler()" class="link">LOAD MORE</button>
 </div>
