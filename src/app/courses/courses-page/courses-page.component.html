@@ -1,7 +1,7 @@
 <div class="search">
   <div class="search__input">
     <i class="search__input-icon material-icons">search</i>
-    <input [(ngModel)]="value" class="search__input-field" placeholder="Text to search" (keyup)="onInput()">
+    <input [(ngModel)]="value" class="search__input-field" placeholder="Text to search" (keyup)="search(value)">
   </div>
 </div>
 
@@ -25,6 +25,6 @@
   </app-course-item>
 </div>
 
-<div class="container" *ngIf="!lastPage">
+<div class="container" *ngIf="showLoadMore">
   <button (click)="loadMoreHandler()" class="link">LOAD MORE</button>
 </div>

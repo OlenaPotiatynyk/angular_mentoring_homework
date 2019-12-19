@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { CourseModel } from '../shared/models/course.model';
 import { HttpClient } from '@angular/common/http';
+
+import { CourseModel } from '../shared/models/course.model';
+
 import { Observable } from 'rxjs';
 
 const BO_URL = 'http://localhost:3004';
@@ -18,11 +20,15 @@ export class CoursesService {
     return this.http.get<CourseModel[]>(BO_URL + '/courses?sort=date&start=' + start + '&count=' + count);
   }
 
-  public getCoursesBySearch(textFragment): Observable<CourseModel[]> {
-    return this.http.get<CourseModel[]>(BO_URL + '/courses?textFragment=' + textFragment);
+  public searchHandler(textFragment: string, count: number): Observable<CourseModel[]> {
+    if (textFragment.length > 2) {
+      return this.getCoursesBySearch(textFragment);
+    } else if  (!textFragment.length) {
+      return this.getPage(0, count);
+    }
   }
 
-  public createCourse(data): Observable<CourseModel> {
+  public createCourse(data: CourseModel): Observable<CourseModel> {
     return this.http.post<CourseModel>(BO_URL + '/courses', data);
   }
 
@@ -30,11 +36,15 @@ export class CoursesService {
     return this.http.get<CourseModel>(BO_URL + '/courses/' + id);
   }
 
-  public updateItem(id: number, data): Observable<CourseModel> {
+  public updateItem(id: number, data: CourseModel): Observable<CourseModel> {
     return this.http.patch<CourseModel>(BO_URL + '/courses/' + id, data);
   }
 
   public removeItem(id: number): Observable<{}> {
     return this.http.delete<{}>(BO_URL + '/courses/' + id);
+  }
+
+  private getCoursesBySearch(textFragment: string): Observable<CourseModel[]> {
+    return this.http.get<CourseModel[]>(BO_URL + '/courses?textFragment=' + textFragment);
   }
 }

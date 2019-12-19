@@ -2,28 +2,38 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 import { LoginInterface } from '../shared/interfaces/login.interface';
+import { UserModel } from '../shared/models/user.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
   redirectUrl: string;
+  authorizedUser = new Subject<any>();
 
-  constructor(private router: Router, private http: HttpClient) { }
+  constructor(private router: Router, private http: HttpClient) {
+  }
 
   public login(data: LoginInterface): void {
     this.getToken(data)
       .subscribe(
         resp => {
-          localStorage.setItem('token', JSON.stringify(resp.token));
+          localStorage.setItem('token', resp.token);
           console.log('log in successfully');
+          this.getUserInfo().subscribe(user => this.authorizedUser.next(user));
           this.router.navigate(['courses']);
         },
-        error => alert(`${error.error}. Please use LOGIN: flastname, PASSWORD: flastname`)
+        error => alert(`${error.error}. Please use LOGIN: flastname, PASSWORD: flastname OR
+         LOGIN: Morales, PASSWORD: id`)
       );
+  }
+
+  public getUserInfo(): Observable<UserModel> {
+    const token = localStorage.getItem('token');
+    return this.http.post<UserModel>('http://localhost:3004/auth/userinfo', {token});
   }
 
   public logout(): void {
@@ -36,8 +46,8 @@ export class AuthService {
     return !!localStorage.getItem('token');
   }
 
-  private getToken(data: LoginInterface): Observable<{token: string}> {
-    return this.http.post<{token: string}>('http://localhost:3004/auth/login', data);
+  private getToken(data: LoginInterface): Observable<{ token: string }> {
+    return this.http.post<{ token: string }>('http://localhost:3004/auth/login', data);
   }
 
 }

@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { CourseModel } from '../../shared/models/course.model';
-import { FilterPipe } from '../../shared/pipes/filter.pipe';
 import { CoursesService } from '../courses.service';
+
+import { Subject } from 'rxjs';
+import { debounceTime, filter, switchMap } from 'rxjs/operators';
 
 const ITEMS_ON_PAGE = 3;
 
@@ -16,27 +18,29 @@ export class CoursesPageComponent implements OnInit {
   public courses: CourseModel[] = [];
   public value = '';
   public startItem = 0;
-  public lastPage = false;
+  public showLoadMore = true;
+  private searchTerms = new Subject<string>();
 
-  constructor(private filter: FilterPipe, private coursesService: CoursesService, private router: Router) {
+  constructor(private coursesService: CoursesService, private router: Router) {
   }
 
   public ngOnInit(): void {
     this.coursesService.getPage(this.startItem)
       .subscribe(resp => this.courses = resp);
+
+    this.searchTerms.pipe(
+      debounceTime(500),
+      filter(term => !term.length || term.length > 2),
+      switchMap((term: string) => this.coursesService.searchHandler(term, this.startItem + 3))
+    )
+      .subscribe(resp => {
+        this.courses = resp;
+        this.showLoadMore = this.showLoadMore && !!this.value.length;
+      });
   }
 
-  public search(): void {
-    if (this.value.length > 2) {
-      this.coursesService.getCoursesBySearch(this.value)
-        .subscribe(resp => {
-          this.courses = resp;
-          this.lastPage = true;
-        });
-    } else if (this.value.length === 0) {
-      this.recallCoursesList();
-      this.lastPage = false;
-    }
+  public search(term): void {
+      this.searchTerms.next(term);
   }
 
   public addCourse(): void {
@@ -49,14 +53,14 @@ export class CoursesPageComponent implements OnInit {
       .subscribe(resp => {
         resp.length > 0
           ? this.courses = this.courses.concat(resp)
-          : this.lastPage = true;
+          : this.showLoadMore = false;
       });
   }
 
   public onDeleteItem(id: number): void {
     const isConfirmed = confirm('Do you really want to delete this course?');
     if (isConfirmed) {
-      this.coursesService.removeItem(id).subscribe(() => this.recallCoursesList(ITEMS_ON_PAGE - 1));
+      this.coursesService.removeItem(id).subscribe(() => this.recallCoursesList());
     }
   }
 
@@ -64,8 +68,8 @@ export class CoursesPageComponent implements OnInit {
     this.router.navigate(['courses/', id]);
   }
 
-  private recallCoursesList(addItems = ITEMS_ON_PAGE): void {
-    this.coursesService.getPage(0, this.startItem + addItems)
+  private recallCoursesList(): void {
+    this.coursesService.getPage(0, this.startItem + ITEMS_ON_PAGE - 1)
       .subscribe(resp => this.courses = resp);
   }
 }

@@ -1,5 +1,10 @@
 export interface UserInterface {
   id: number;
-  firstName: string;
-  lastName: string;
+  login: string;
+  name: {
+    first: string;
+    last: string;
+  };
+  fakeToken: string;
+  password: string;
 }
