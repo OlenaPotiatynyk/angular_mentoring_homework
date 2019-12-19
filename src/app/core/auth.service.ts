@@ -30,8 +30,7 @@ export class AuthService {
           this.getUserInfo().subscribe(user => this.authorizedUser.next(user));
           this.router.navigate(['courses']);
         },
-        error => alert(`${error.error}. Please use LOGIN: flastname, PASSWORD: flastname OR
-         LOGIN: Morales, PASSWORD: id`)
+        error => alert(`${error.error}. Please use LOGIN: flastname, PASSWORD: flastname OR LOGIN: Morales, PASSWORD: id`)
       );
   }
 
