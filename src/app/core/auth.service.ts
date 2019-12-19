@@ -13,7 +13,7 @@ import { environment } from '../../environments/environment';
 })
 export class AuthService {
   redirectUrl: string;
-  authorizedUser = new Subject<any>();
+  authorizedUser = new Subject<UserModel>();
 
   private baseUrl = environment.baseUrl;
   private AUTH_URL = this.baseUrl + '/auth';

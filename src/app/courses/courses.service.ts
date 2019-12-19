@@ -13,7 +13,7 @@ const PAGE_SIZE = 3;
 })
 export class CoursesService {
   private baseUrl = environment.baseUrl;
-  private COURSES_URL = this.baseUrl + '/courses';
+  private COURSES_URL = this.baseUrl + '/courses/';
 
   constructor(private http: HttpClient) {
   }
