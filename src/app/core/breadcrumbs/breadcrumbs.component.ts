@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRouteSnapshot, NavigationEnd, Router, UrlSegment } from '@angular/router';
+
 import { CoursesService } from '../../courses/courses.service';
+
 import { filter } from 'rxjs/operators';
 
 @Component({

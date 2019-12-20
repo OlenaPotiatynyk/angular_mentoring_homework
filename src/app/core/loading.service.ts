@@ -5,7 +5,6 @@ import { Injectable } from '@angular/core';
 })
 export class LoadingService {
 
-  constructor() { }
   private state: boolean;
 
   getState(): boolean {
