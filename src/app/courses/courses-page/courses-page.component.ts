@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { CourseModel } from '../../shared/models/course.model';
-import { FilterPipe } from '../../shared/pipes/filter.pipe';
 import { CoursesService } from '../courses.service';
+
+import { Subject } from 'rxjs';
+import { debounceTime, filter, switchMap } from 'rxjs/operators';
 
 const ITEMS_ON_PAGE = 3;
 
@@ -16,30 +18,31 @@ export class CoursesPageComponent implements OnInit {
   public courses: CourseModel[] = [];
   public value = '';
   public startItem = 0;
-  public lastPage = false;
-  public storedCourses = null;
+  public showLoadMore = true;
 
-  constructor(private filter: FilterPipe, private coursesService: CoursesService, private router: Router) {
+  private lastPage = false;
+  private searchTerms = new Subject<string>();
+
+  constructor(private coursesService: CoursesService, private router: Router) {
   }
 
   public ngOnInit(): void {
     this.coursesService.getPage(this.startItem)
       .subscribe(resp => this.courses = resp);
+
+    this.searchTerms.pipe(
+      debounceTime(500),
+      filter(term => !term.length || term.length > 2),
+      switchMap((term: string) => this.coursesService.searchHandler(term, this.startItem + 3))
+    )
+      .subscribe(resp => {
+        this.courses = resp;
+        this.showLoadMore = !this.lastPage && !this.value.length;
+      });
   }
 
-  public search(): void {
-    if (this.value.length > 0) {
-      this.coursesService.getCoursesBySearch(this.value)
-        .subscribe(resp => {
-          this.storedCourses = this.courses;
-          this.courses = resp;
-          this.lastPage = true;
-        });
-    } else if (this.value.length === 0 && this.storedCourses) {
-      this.courses = this.storedCourses;
-      this.storedCourses = null;
-      this.lastPage = false;
-    }
+  public search(term): void {
+      this.searchTerms.next(term);
   }
 
   public addCourse(): void {
@@ -68,7 +71,7 @@ export class CoursesPageComponent implements OnInit {
   }
 
   private recallCoursesList(): void {
-    this.coursesService.getPage(0, this.startItem + 2)
+    this.coursesService.getPage(0, this.startItem + ITEMS_ON_PAGE - 1)
       .subscribe(resp => this.courses = resp);
   }
 }
