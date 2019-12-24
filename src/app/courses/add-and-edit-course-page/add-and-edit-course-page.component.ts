@@ -21,7 +21,7 @@ export class AddAndEditCoursePageComponent implements OnInit {
 
   constructor(private coursesService: CoursesService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
-  public ngOnInit() {
+  public ngOnInit(): void {
     this.activatedRoute.params.subscribe((routeParams) => {
       this.routeParams.id = +routeParams.id;
     });

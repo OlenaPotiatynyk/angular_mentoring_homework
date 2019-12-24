@@ -9,7 +9,7 @@ import { ChangeDetectionStrategy, Component, Input, OnChanges } from '@angular/c
 export class InputDateComponent implements OnChanges {
   @Input() creationDate: string;
 
-  public ngOnChanges() {
+  public ngOnChanges(): void {
     this.formatDate();
   }
 
