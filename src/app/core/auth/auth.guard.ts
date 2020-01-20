@@ -22,7 +22,7 @@ export class AuthGuard implements CanActivate {
   }
 
   private checkLogin(url: string): boolean {
-    if (this.authService.isAuthenticated()) {
+    if (!!localStorage.getItem('token')) {
       return true;
     }
 

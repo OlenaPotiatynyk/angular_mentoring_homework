@@ -1,6 +1,9 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import { AuthService } from '../core/auth.service';
+
+import { Store } from '@ngrx/store';
+
+import { login } from '../store/actions/auth.actions';
 
 @Component({
   selector: 'app-login-page',
@@ -14,11 +17,10 @@ export class LoginPageComponent {
     password: new FormControl(''),
   });
 
-  constructor(private authService: AuthService) {
+  constructor(private userStore: Store<{ auth }>) {
   }
 
   onSubmit(): void {
-    this.authService.login(this.loginForm.value);
+    this.userStore.dispatch(login(this.loginForm.value));
   }
-
 }

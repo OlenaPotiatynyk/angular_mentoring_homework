@@ -1,19 +1,26 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from './core/auth.service';
 import { LoadingService } from './core/loading.service';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'angular-mentoring-homework';
+  isAuthenticated: boolean;
 
-  constructor(private authService: AuthService, private loadingService: LoadingService) {}
+  constructor(
+      private authService: AuthService,
+      private loadingService: LoadingService,
+      private userStore: Store<{ auth }>
+  ) {
+  }
 
-  userIsAuthorised(): boolean {
-    return this.authService.isAuthenticated();
+  ngOnInit(): void {
+    this.userStore.select('auth').subscribe(data => this.isAuthenticated = data.isAuthenticated);
   }
 
   isLoadingData(): boolean {
