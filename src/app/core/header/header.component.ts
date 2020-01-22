@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { AuthService } from '../auth.service';
-import { UserModel } from '../../shared/models/user.model';
 import { Store } from '@ngrx/store';
-import { logout } from '../../store/actions/auth.actions';
+import { logout, getUserData } from '../../store/actions/auth.actions';
 
 @Component({
   selector: 'app-header',
@@ -23,10 +22,14 @@ export class HeaderComponent implements OnInit {
     });
 
     if (this.isAuthenticated) {
-      this.authService.getUserInfo().subscribe((resp: UserModel) => this.glueTheName(resp.name));
+        this.userStore.dispatch(getUserData());
     }
 
-    this.authService.authorizedUser.subscribe((resp: UserModel) => this.glueTheName(resp.name));
+      this.userStore.select('auth').subscribe(data => {
+          if (data.user) {
+              this.glueTheName(data.user.name)
+          }
+      });
   }
 
   logOut(): void {

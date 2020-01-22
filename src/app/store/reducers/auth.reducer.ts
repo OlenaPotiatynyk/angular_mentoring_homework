@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 
-import { init, login, logout } from '../actions/auth.actions';
+import { login, logout, setUserData } from '../actions/auth.actions';
 import { UserModel } from '../../shared/models/user.model';
 
 export interface AuthState {
@@ -14,13 +14,13 @@ export const initialState: AuthState = {
 };
 
 const _authReducer = createReducer(initialState,
-    on(init, AuthState => {
-        console.log('init');
-        return AuthState
-    }),
     on(login, AuthState => {
         console.log('login');
         return {...AuthState, isAuthenticated: true}
+    }),
+    on(setUserData, (AuthState, updatedValue) => {
+        console.log(`user: ${updatedValue.name.first} ${updatedValue.name.last} is logged in`);
+        return {...AuthState, user: updatedValue}
     }),
     on(logout, AuthState => {
         console.log('logout');

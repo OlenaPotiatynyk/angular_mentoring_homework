@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
-import { Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { TypedAction } from '@ngrx/store/src/models';
 
 import { LoginInterface } from '../shared/interfaces/login.interface';
@@ -14,7 +14,6 @@ import { environment } from '../../environments/environment';
 })
 export class AuthService {
   redirectUrl: string;
-  authorizedUser = new Subject<UserModel>();
 
   private baseUrl = environment.baseUrl;
   private AUTH_URL = this.baseUrl + '/auth';

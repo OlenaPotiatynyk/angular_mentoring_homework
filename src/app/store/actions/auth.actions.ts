@@ -2,10 +2,6 @@ import { createAction, props } from '@ngrx/store';
 
 import { UserInterface } from '../../shared/interfaces/user.interface';
 
-export const init = createAction(
-    '[Auth] Init'
-);
-
 export const login = createAction(
     '[Auth] Login',
     props<UserInterface>()
@@ -14,6 +10,15 @@ export const login = createAction(
 export const loginSuccess = createAction(
     '[Auth] Login Success',
     props<{ token: string }>()
+);
+
+export const getUserData = createAction(
+    '[Auth] Get User Data'
+);
+
+export const setUserData = createAction(
+    '[Auth] Set User Data',
+    props<UserInterface>()
 );
 
 export const loginFail = createAction(
