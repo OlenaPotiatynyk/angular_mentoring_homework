@@ -35,6 +35,11 @@ h6 {
     cursor: pointer;
   }
 
+  &:disabled {
+    color: $slate-grey;
+    background-color: $pale-grey;
+  }
+
   &_s {
     height: 24px;
     font-size: 12px;

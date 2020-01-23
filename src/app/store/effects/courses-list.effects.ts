@@ -31,7 +31,8 @@ export class CoursesListEffects {
             this.actions.pipe(
                 ofType(deleteCourse),
                 tap(action => {
-                    this.coursesService.removeItem(action.id);
+                    this.coursesService.removeItem(action.id)
+                        .subscribe(() => console.log(`Course ${action.id} successfully deleted`));
                 })
             )
         ,

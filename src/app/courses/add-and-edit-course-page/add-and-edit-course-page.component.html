@@ -1,23 +1,35 @@
 <div class="container">
-  <h2 *ngIf="!routeParams.id">New course</h2>
-  <div class="input-group input-group_full-size">
-    <label for="title">Title:<span>*required</span></label>
-    <input id="title" [ngModel]="name | titlecase" (ngModelChange)="name=$event" placeholder="Text input" required>
-  </div>
+    <h2 *ngIf="!routeParams.id">New course</h2>
 
-  <div class="input-group input-group_full-size">
-    <label for="description">Description:<span>*required</span></label>
-    <textarea id="description" [(ngModel)]="description" placeholder="Add description" required></textarea>
-  </div>
+    <form [formGroup]="courseForm" (ngSubmit)="onSubmit()">
+        <div class="input-group input-group_full-size">
+            <label for="title">Title:<span>*required</span></label>
+            <input id="title" formControlName="name" placeholder="Text input">
+            <span *ngIf="f.name.errors?.maxlength" class="error-message">*max length = 50</span>
+        </div>
 
-  <app-input-date [creationDate]="date" (input)="date=$event.target.value"></app-input-date>
+        <div class="input-group input-group_full-size">
+            <label for="description">Description:<span>*required</span></label>
+            <textarea id="description" formControlName="description" placeholder="Add description"></textarea>
+            <span *ngIf="f.description.errors?.maxlength" class="error-message">*max length = 500</span>
+        </div>
 
-  <app-input-duration [duration]="length" (input)="length=$event.target.value"></app-input-duration>
+        <app-input-date formControlName="date"
+                        [creationDate]="courseForm.value.date"
+                        (input)="courseForm.value.date=$event.target.value"></app-input-date>
 
-  <app-input-tag [authors]="authors" (input)="authors=$event.target.value"></app-input-tag>
+        <app-input-duration formControlName="length"
+                            [duration]="courseForm.value.length"
+                            (input)="courseForm.value.length=$event.target.value"></app-input-duration>
 
-  <div class="footer">
-    <button type="cancel" class="button button_m button_cancel" routerLink="/courses">Cancel</button>
-    <button type="submit" class="button button_m button_ok" (click)="onSubmit()">Save</button>
-  </div>
+        <app-input-tag formControlName="authors"
+                       [authors]="courseForm.value.authors"
+                       (input)="courseForm.value.authors=$event.target.value"></app-input-tag>
+        <span *ngIf="f.authors.errors?.minLength" class="error-message">*at least one author should be</span>
+
+        <div class="footer">
+            <button type="cancel" class="button button_m button_cancel" routerLink="/courses">Cancel</button>
+            <button type="submit" class="button button_m button_ok" [disabled]="courseForm.invalid">Save</button>
+        </div>
+    </form>
 </div>
