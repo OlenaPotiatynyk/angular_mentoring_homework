@@ -17,6 +17,7 @@ import { CoursesModule } from './courses/courses.module';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { AuthEffects } from './store/effects/auth.effects';
+import { CoursesListEffects } from './store/effects/courses-list.effects';
 
 @NgModule({
   declarations: [
@@ -33,9 +34,9 @@ import { AuthEffects } from './store/effects/auth.effects';
     ReactiveFormsModule,
     StoreModule.forRoot(reducers, {metaReducers}),
     StoreDevtoolsModule.instrument({maxAge: 25, logOnly: environment.production}),
-    EffectsModule.forRoot([AuthEffects])
+      EffectsModule.forRoot([AuthEffects, CoursesListEffects])
   ],
-  providers: [AuthEffects],
+    providers: [AuthEffects, CoursesListEffects],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

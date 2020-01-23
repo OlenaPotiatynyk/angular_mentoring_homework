@@ -1,20 +1,19 @@
 import {
-  ActionReducer,
   ActionReducerMap,
-  createFeatureSelector,
-  createSelector,
   MetaReducer
 } from '@ngrx/store';
 import { environment } from '../../../environments/environment';
 
 import { authReducer } from './auth.reducer';
+import { courseListReducer } from './course-list.reducer';
 
 export interface State {
 
 }
 
 export const reducers: ActionReducerMap<State> = {
-  auth: authReducer
+  auth: authReducer,
+  courseList: courseListReducer
 };
 
 

@@ -24,7 +24,7 @@ export class AuthService {
   login(data: LoginInterface & TypedAction<"[Auth] Login">): Observable<{ token: string }> {
     const userData = {
       login: data.login,
-      password: data.login
+        password: data.password
     };
     return this.http.post<{ token: string }>(this.AUTH_URL + '/login', userData);
   }

@@ -18,8 +18,8 @@ export class CoursesService {
   constructor(private http: HttpClient) {
   }
 
-  public getPage(start = 0, count = PAGE_SIZE): Observable<CourseModel[]> {
-    const url = this.COURSES_URL + '?sort=date&start=' + start + '&count=' + count;
+  public getPage(start: number): Observable<CourseModel[]> {
+    const url = this.COURSES_URL + '?sort=date&start=' + start + '&count=' + PAGE_SIZE;
     return this.http.get<CourseModel[]>(url);
   }
 
@@ -27,7 +27,7 @@ export class CoursesService {
     if (textFragment.length > 2) {
       return this.getCoursesBySearch(textFragment);
     } else if  (!textFragment.length) {
-      return this.getPage(0, count);
+      return;
     }
   }
 

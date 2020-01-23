@@ -6,8 +6,8 @@ import { CoursesService } from '../courses.service';
 
 import { Subject } from 'rxjs';
 import { debounceTime, filter, switchMap } from 'rxjs/operators';
-
-const ITEMS_ON_PAGE = 3;
+import { Store } from '@ngrx/store';
+import { getCoursesData, deleteCourse } from '../../store/actions/courses-list.actions';
 
 @Component({
   selector: 'app-courses-page',
@@ -15,20 +15,25 @@ const ITEMS_ON_PAGE = 3;
   styleUrls: ['./courses-page.component.scss']
 })
 export class CoursesPageComponent implements OnInit {
+    public startItem: number;
+    public showLoadMore: boolean = true;
   public courses: CourseModel[] = [];
-  public value = '';
-  public startItem = 0;
-  public showLoadMore = true;
+    public value: string = '';
 
-  private lastPage = false;
+    private lastPage: boolean;
   private searchTerms = new Subject<string>();
 
-  constructor(private coursesService: CoursesService, private router: Router) {
+    constructor(private coursesService: CoursesService,
+                private router: Router,
+                private courseListStore: Store<{ courseList }>) {
   }
 
   public ngOnInit(): void {
-    this.coursesService.getPage(this.startItem)
-      .subscribe(resp => this.courses = resp);
+      this.courseListStore.select('courseList').subscribe(data => {
+          this.courses = data.courseList;
+          this.startItem = data.startItem;
+          this.lastPage = data.lastPage
+      });
 
     this.searchTerms.pipe(
       debounceTime(500),
@@ -50,28 +55,17 @@ export class CoursesPageComponent implements OnInit {
   }
 
   public loadMoreHandler(): void {
-    this.startItem += ITEMS_ON_PAGE;
-    this.coursesService.getPage(this.startItem)
-      .subscribe(resp => {
-        resp.length > 0
-          ? this.courses = this.courses.concat(resp)
-          : this.lastPage = true;
-      });
+      this.courseListStore.dispatch(getCoursesData({startItem: this.startItem}));
   }
 
   public onDeleteItem(id: number): void {
     const isConfirmed = confirm('Do you really want to delete this course?');
     if (isConfirmed) {
-      this.coursesService.removeItem(id).subscribe(() => this.recallCoursesList());
+        this.courseListStore.dispatch(deleteCourse({id}));
     }
   }
 
   public onEditItem(id: number): void {
     this.router.navigate(['courses/', id]);
-  }
-
-  private recallCoursesList(): void {
-    this.coursesService.getPage(0, this.startItem + ITEMS_ON_PAGE - 1)
-      .subscribe(resp => this.courses = resp);
   }
 }
