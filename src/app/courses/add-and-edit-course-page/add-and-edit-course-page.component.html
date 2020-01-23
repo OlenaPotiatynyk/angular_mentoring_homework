@@ -5,27 +5,27 @@
         <div class="input-group input-group_full-size">
             <label for="title">Title:<span>*required</span></label>
             <input id="title" formControlName="name" placeholder="Text input">
-            <span *ngIf="f.name.errors?.maxlength" class="error-message">*max length = 50</span>
+            <span *ngIf="controls.name.errors?.maxlength" class="error-message">*max length = 50</span>
         </div>
 
         <div class="input-group input-group_full-size">
             <label for="description">Description:<span>*required</span></label>
             <textarea id="description" formControlName="description" placeholder="Add description"></textarea>
-            <span *ngIf="f.description.errors?.maxlength" class="error-message">*max length = 500</span>
+            <span *ngIf="controls.description.errors?.maxlength" class="error-message">*max length = 500</span>
         </div>
 
         <app-input-date formControlName="date"
                         [creationDate]="courseForm.value.date"
-                        (input)="courseForm.value.date=$event.target.value"></app-input-date>
+                        (input)="courseForm.patchValue({ date: $event.target.value})"></app-input-date>
 
         <app-input-duration formControlName="length"
                             [duration]="courseForm.value.length"
-                            (input)="courseForm.value.length=$event.target.value"></app-input-duration>
+                            (input)="courseForm.patchValue({ length: $event.target.value})"></app-input-duration>
 
         <app-input-tag formControlName="authors"
                        [authors]="courseForm.value.authors"
-                       (input)="courseForm.value.authors=$event.target.value"></app-input-tag>
-        <span *ngIf="f.authors.errors?.minLength" class="error-message">*at least one author should be</span>
+                       (input)="courseForm.patchValue({ authors: $event.target.value})"></app-input-tag>
+        <span *ngIf="controls.authors.errors?.minLength" class="error-message">*at least one author should be</span>
 
         <div class="footer">
             <button type="cancel" class="button button_m button_cancel" routerLink="/courses">Cancel</button>
