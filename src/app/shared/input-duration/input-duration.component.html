@@ -1,7 +1,7 @@
 <div class="input-group input-group_semi-size">
   <label for="duration" class="label-row">Duration:<span>*required</span></label>
   <div class="row">
-      <input id="duration" type="number" placeholder="minutes" value="{{duration}}">
+      <input id="duration" type="number" placeholder="minutes" value="{{duration}}" (focus)="onTouch(duration)">
     <span>{{ duration | time }}</span>
   </div>
 </div>

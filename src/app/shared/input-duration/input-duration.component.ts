@@ -16,13 +16,22 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 export class InputDurationComponent implements ControlValueAccessor {
   @Input() duration: number;
 
-  registerOnChange(fn: any): void {
+  set value(val) {
+    this.onTouch(val);
   }
 
-  registerOnTouched(fn: any): void {
+  public onTouch: any = () => {
+  };
+
+  public registerOnChange(fn: any): void {
   }
 
-  writeValue(obj: any): void {
+  public registerOnTouched(fn: any): void {
+    this.onTouch = fn;
+  }
+
+  public writeValue(obj: any): void {
+    this.value = obj;
   }
 
 }

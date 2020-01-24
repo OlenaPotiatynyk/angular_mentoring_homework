@@ -14,24 +14,29 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     }
   ]
 })
-export class InputDateComponent implements OnChanges, ControlValueAccessor {
-  @Input() creationDate: string;
+export class InputDateComponent implements ControlValueAccessor {
+  @Input() creationDate: any;
 
-  public ngOnChanges(): void {
+  set value(val) {
+    this.onTouch(val);
+  }
+
+  public onTouch: any = () => {
+  };
+
+  public registerOnChange(fn: any): void {
     this.formatDate();
   }
 
+  public registerOnTouched(fn: any): void {
+    this.onTouch = fn;
+  }
+
+  public writeValue(obj: any): void {
+    this.value = obj;
+  }
+
   private formatDate(): void {
-    this.creationDate = this.creationDate.split('T')[0];
+    this.creationDate = this.creationDate.value.date.split('T')[0];
   }
-
-  registerOnChange(fn: any): void {
-  }
-
-  registerOnTouched(fn: any): void {
-  }
-
-  writeValue(obj: any): void {
-  }
-
 }

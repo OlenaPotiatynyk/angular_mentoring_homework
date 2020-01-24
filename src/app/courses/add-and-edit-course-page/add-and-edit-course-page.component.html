@@ -4,28 +4,33 @@
     <form [formGroup]="courseForm" (ngSubmit)="onSubmit()">
         <div class="input-group input-group_full-size">
             <label for="title">Title:<span>*required</span></label>
-            <input id="title" formControlName="name" placeholder="Text input">
             <span *ngIf="controls.name.errors?.maxlength" class="error-message">*max length = 50</span>
+            <input id="title" formControlName="name" placeholder="Text input">
         </div>
 
         <div class="input-group input-group_full-size">
             <label for="description">Description:<span>*required</span></label>
-            <textarea id="description" formControlName="description" placeholder="Add description"></textarea>
             <span *ngIf="controls.description.errors?.maxlength" class="error-message">*max length = 500</span>
+            <textarea id="description" formControlName="description" placeholder="Add description"></textarea>
         </div>
 
         <app-input-date formControlName="date"
-                        [creationDate]="courseForm.value.date"
+                        [creationDate]="courseForm"
                         (input)="courseForm.patchValue({ date: $event.target.value})"></app-input-date>
+        <span *ngIf="controls.date.errors?.required && controls.date.touched"
+              class="error-message">*date is required</span>
 
         <app-input-duration formControlName="length"
                             [duration]="courseForm.value.length"
                             (input)="courseForm.patchValue({ length: $event.target.value})"></app-input-duration>
+        <span *ngIf="controls.length.errors?.required && controls.length.touched"
+              class="error-message">*duration is required</span>
 
         <app-input-tag formControlName="authors"
                        [authors]="courseForm.value.authors"
                        (input)="courseForm.patchValue({ authors: $event.target.value})"></app-input-tag>
-        <span *ngIf="controls.authors.errors?.minLength" class="error-message">*at least one author should be</span>
+        <span *ngIf="controls.authors.errors?.required && controls.authors.touched"
+              class="error-message">*at least one author should be</span>
 
         <div class="footer">
             <button type="cancel" class="button button_m button_cancel" routerLink="/courses">Cancel</button>

@@ -1,4 +1,4 @@
 <div class="input-group input-group_semi-size">
   <label for="authors">Authors:<span>*required</span></label>
-  <input id="authors" type="text" value="{{authors}}" placeholder="Start typing" required>
+  <input id="authors" type="text" value="{{authors}}" placeholder="Start typing" (focus)="onTouch(authors)">
 </div>
